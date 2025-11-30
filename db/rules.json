@@ -1,0 +1,122 @@
+{
+    "mec_complex_rules": [
+        {
+            "name": "Class A",
+            "required": [
+                "mecA",
+                "mecR1",
+                "mecI"
+            ],
+            "description": "mecA + mecR1 + mecI"
+        },
+        {
+            "name": "Class B",
+            "required": [
+                "mecA",
+                "IS1272"
+            ],
+            "description": "mecA + IS1272 (mecR1 truncated)"
+        },
+        {
+            "name": "Class C",
+            "required": [
+                "mecA"
+            ],
+            "any_of": [
+                "IS431",
+                "IS431_1",
+                "IS431_2"
+            ],
+            "description": "mecA + IS431"
+        },
+        {
+            "name": "Class C2",
+            "required": [
+                "mecC"
+            ],
+            "description": "mecC-associated"
+        },
+        {
+            "name": "Plasmid-borne (mecB)",
+            "required": [
+                "mecB"
+            ],
+            "description": "mecB-associated"
+        },
+        {
+            "name": "Class Unclear (mecA)",
+            "required": [
+                "mecA"
+            ],
+            "description": "mecA found but no complex markers"
+        }
+    ],
+    "ccr_complex_rules": [
+        {
+            "name": "Type 1",
+            "match_substring": "1"
+        },
+        {
+            "name": "Type 2",
+            "match_substring": "2"
+        },
+        {
+            "name": "Type 3",
+            "match_substring": "3"
+        },
+        {
+            "name": "Type 4",
+            "match_substring": "4"
+        },
+        {
+            "name": "Type 5",
+            "match_substring": "5"
+        },
+        {
+            "name": "Type 8",
+            "match_substring": "8"
+        }
+    ],
+    "sccmec_type_rules": [
+        {
+            "name": "Type I",
+            "mec": "Class B",
+            "ccr": "Type 1"
+        },
+        {
+            "name": "Type II",
+            "mec": "Class A",
+            "ccr": "Type 2"
+        },
+        {
+            "name": "Type III",
+            "mec": "Class A",
+            "ccr": "Type 3"
+        },
+        {
+            "name": "Type IV",
+            "mec": "Class B",
+            "ccr": "Type 2"
+        },
+        {
+            "name": "Type V",
+            "mec": "Class C",
+            "ccr": "Type 5"
+        },
+        {
+            "name": "Type VI",
+            "mec": "Class B",
+            "ccr": "Type 4"
+        },
+        {
+            "name": "Type XI",
+            "mec": "Class C2",
+            "ccr": "ANY"
+        },
+        {
+            "name": "n/a (Plasmid)",
+            "mec": "Plasmid-borne (mecB)",
+            "ccr": "ANY"
+        }
+    ]
+}
