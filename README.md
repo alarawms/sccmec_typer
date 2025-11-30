@@ -6,14 +6,15 @@ A robust, standalone bioinformatics tool for **Staphylococcal Cassette Chromosom
 *   **Fast**: Built on `minimap2` for rapid alignment of assemblies or long reads.
 *   **Robust**: Component-based typing handles novel or composite elements better than whole-cassette matching.
 *   **Accurate**: Verified against standard reference genomes (COL, N315, Mu50, MW2, USA300).
-*   **Containerized**: Docker support for easy deployment.
+*   **Configuration-Driven**: Classification logic is defined in `db/rules.json`, allowing for easy customization and extension of SCCmec types.
+*   **Dockerized**: Fully containerized for easy deployment.
 
 ## Installation
 
 ### Local Development
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/sccmec_typer.git
+    git clone https://github.com/alarawms/sccmec_typer.git
     cd sccmec_typer
     ```
 2.  Set up the environment (creates `.venv`, installs `pytest`, downloads `minimap2`):
@@ -44,35 +45,4 @@ docker run --rm -v $(pwd):/data sccmec_typer \
   -i /data/input.fasta \
   -d /app/db/sccmec_targets.fasta \
   -o /data/output_prefix
-```
-
-## Publishing to Docker Hub
-
-To push this tool to Docker Hub so others can use it:
-
-1.  **Login** to Docker Hub:
-    ```bash
-    docker login
-    ```
-
-2.  **Tag** the image with your username:
-    ```bash
-    # Replace 'yourusername' with your actual Docker Hub username
-    docker tag sccmec_typer yourusername/sccmec_typer:latest
-    docker tag sccmec_typer yourusername/sccmec_typer:v0.1.0
-    ```
-
-3.  **Push** the image:
-    ```bash
-    docker push yourusername/sccmec_typer:latest
-    docker push yourusername/sccmec_typer:v0.1.0
-    ```
-
-## Testing
-Run the verification tests against reference genomes:
-```bash
-# Requires .venv to be active
-./setup_dev.sh # If not already done
-source .venv/bin/activate
-python3 bin/sccmec_typer.py -i tests/data/COL.fna -d db/sccmec_targets.fasta -o test_COL
 ```
