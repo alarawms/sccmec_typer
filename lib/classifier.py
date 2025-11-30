@@ -31,6 +31,9 @@ def classify_sccmec(hits_list):
     if len(contigs_found) > 1:
         warnings.append(f"Split Assembly: Components found on {len(contigs_found)} different contigs: {', '.join(contigs_found)}")
 
+    # 0. Check for mecA presence
+    mecA_present = "mecA" in genes_found
+    
     # 1. Identify mec Complex
     mec_complex = "Negative"
     
@@ -63,7 +66,12 @@ def classify_sccmec(hits_list):
     status = "Positive"
 
     if mec_complex == "Negative" and ccr_complex == "Negative":
-        return {"status": "Negative", "reason": "No mec or ccr genes found", "genes_detected": list(genes_found)}
+        return {
+            "status": "Negative", 
+            "reason": "No mec or ccr genes found", 
+            "genes_detected": list(genes_found),
+            "mecA_present": mecA_present
+        }
     
     if mec_complex == "Negative":
         status = "Partial (Orphan ccr)"
@@ -112,6 +120,7 @@ def classify_sccmec(hits_list):
         "mec_complex": mec_complex,
         "ccr_complex": ccr_complex,
         "genes_detected": list(genes_found),
+        "mecA_present": mecA_present,
         "warnings": warnings,
         "hits_summary": hits_list
     }

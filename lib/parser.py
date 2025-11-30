@@ -18,11 +18,11 @@ def parse_paf(paf_file):
                 query_len = int(row[1])
                 query_start = int(row[2])
                 query_end = int(row[3])
-                # strand = row[4]
+                strand = row[4]
                 target_name = row[5]
-                # target_len = int(row[6])
-                # target_start = int(row[7])
-                # target_end = int(row[8])
+                target_len = int(row[6])
+                target_start = int(row[7])
+                target_end = int(row[8])
                 matches = int(row[9])
                 block_len = int(row[10])
                 
@@ -58,7 +58,14 @@ def parse_paf(paf_file):
                         "scc_type": scc_type,
                         "identity": identity,
                         "coverage": coverage,
-                        "contig": target_name
+                        "contig": target_name,
+                        "start": target_start,
+                        "end": target_end,
+                        "strand": strand,
+                        "len": query_len,
+                        "aln_len": block_len,
+                        "id_pct": identity * 100,
+                        "cov_pct": coverage * 100
                     })
                     
     except FileNotFoundError:

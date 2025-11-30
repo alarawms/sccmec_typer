@@ -2,7 +2,7 @@ import subprocess
 import sys
 import os
 
-def run_minimap2(input_file, db_file, output_paf, threads=4):
+def run_minimap2(input_file, db_file, output_paf, threads=4, preset="asm5", target_is_db=False):
     """
     Runs minimap2 to align input sequences against the reference database.
     """
@@ -16,12 +16,21 @@ def run_minimap2(input_file, db_file, output_paf, threads=4):
     if os.path.exists(local_bin):
         minimap2_cmd = local_bin
 
+    if target_is_db:
+        # Target = DB, Query = Input (Reads)
+        target = db_file
+        query = input_file
+    else:
+        # Target = Input (Genome), Query = DB
+        target = input_file
+        query = db_file
+
     cmd = [
         minimap2_cmd,
-        "-cx", "asm5", # Optimized for assembly-to-assembly
+        "-cx", preset, 
         "-t", str(threads),
-        input_file, # Target (Genome)
-        db_file     # Query (Genes)
+        target,
+        query
     ]
     
     print(f"Running: {' '.join(cmd)}")
