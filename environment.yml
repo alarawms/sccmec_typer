@@ -1,0 +1,10 @@
+name: sccmec_typer
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python>=3.9
+  - minimap2
+  - pandas
+  - pytest
