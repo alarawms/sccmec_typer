@@ -3,10 +3,12 @@
 A robust, standalone bioinformatics tool for **Staphylococcal Cassette Chromosome mec (SCCmec)** typing in *Staphylococcus aureus* genomes. It uses `minimap2` for fast, accurate alignment and a component-based classification logic (identifying *mec* and *ccr* complexes) to determine the SCCmec type.
 
 ## Features
-*   **Fast**: Built on `minimap2` for rapid alignment of assemblies or long reads.
+*   **Fast**: Built on `minimap2` for rapid alignment.
+*   **Versatile**: Supports **Assembly** (FASTA), **Long Reads** (Nanopore FASTQ), and **Short Reads** (Illumina Paired-End FASTQ).
 *   **Robust**: Component-based typing handles novel or composite elements better than whole-cassette matching.
 *   **Accurate**: Verified against standard reference genomes (COL, N315, Mu50, MW2, USA300).
-*   **Configuration-Driven**: Classification logic is defined in `db/rules.json`, allowing for easy customization and extension of SCCmec types.
+*   **Detailed Reporting**: Explicitly reports `mecA` presence and provides detailed CSV output for all detected elements.
+*   **Configuration-Driven**: Classification logic is defined in `db/rules.json`, allowing for easy customization.
 *   **Dockerized**: Fully containerized for easy deployment.
 
 ## Installation
@@ -31,10 +33,32 @@ docker build -t sccmec_typer .
 
 ## Usage
 
-### Running Locally
+The tool accepts assemblies or reads (single or paired-end).
+
+### 1. Assembly Mode
+For finished genomes or contigs (FASTA).
 ```bash
 python3 bin/sccmec_typer.py \
-  -i input.fasta \
+  --1 assembly.fasta \
+  -d db/sccmec_targets.fasta \
+  -o output_prefix
+```
+
+### 2. Read Mode (Long Reads / Single-End)
+For Nanopore or PacBio reads (FASTQ). The tool automatically detects FASTQ input and switches to read mode.
+```bash
+python3 bin/sccmec_typer.py \
+  --1 reads.fastq \
+  -d db/sccmec_targets.fasta \
+  -o output_prefix
+```
+
+### 3. Read Mode (Paired-End Short Reads)
+For Illumina paired-end data.
+```bash
+python3 bin/sccmec_typer.py \
+  --1 reads_R1.fastq \
+  --2 reads_R2.fastq \
   -d db/sccmec_targets.fasta \
   -o output_prefix
 ```
@@ -42,7 +66,13 @@ python3 bin/sccmec_typer.py \
 ### Running with Docker
 ```bash
 docker run --rm -v $(pwd):/data sccmec_typer \
-  -i /data/input.fasta \
+  --1 /data/input.fasta \
   -d /app/db/sccmec_targets.fasta \
   -o /data/output_prefix
 ```
+
+## Outputs
+The tool generates three output files:
+1.  **`{prefix}.tsv`**: A summary table containing the Sample Name, Status, **mecA Presence**, SCCmec Type, Mec Complex, Ccr Complex, and Detected Genes.
+2.  **`{prefix}.json`**: A detailed JSON report with the full classification structure.
+3.  **`{prefix}_elements.csv`**: A detailed list of all detected genetic elements (genes), including their coordinates, identity, and coverage.
