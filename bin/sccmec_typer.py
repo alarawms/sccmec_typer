@@ -12,21 +12,26 @@ from lib.classifier import classify_sccmec
 
 def main():
     parser = argparse.ArgumentParser(description="SCCmec Typer: A minimap2-based tool for typing SCCmec elements.")
-    parser.add_argument("-i", "--input", required=True, help="Input genome assembly (FASTA) or long reads (FASTQ)")
+    parser.add_argument("--1", dest="input1", required=True, help="Input genome assembly (FASTA) or forward reads (FASTQ)")
+    parser.add_argument("--2", dest="input2", help="Input reverse reads (FASTQ) for paired-end data")
     parser.add_argument("-d", "--db", required=True, help="Path to reference database (mfa)")
     parser.add_argument("-o", "--output", default="sccmec_results", help="Output prefix")
     parser.add_argument("--threads", type=int, default=4, help="Number of threads")
     
     args = parser.parse_args()
     
-    print(f"Starting SCCmec Typer on {args.input}...")
+    print(f"Starting SCCmec Typer on {args.input1}...")
     
     # Determine input type and preset
     # Default to asm5 for assembly
     preset = "asm5"
     is_reads = False
     
-    if args.input.lower().endswith(('.fastq', '.fq', '.fastq.gz', '.fq.gz')):
+    if args.input2:
+        print("Note: Paired-end inputs detected. Switching to Read Mode (Short Reads).")
+        preset = "sr"
+        is_reads = True
+    elif args.input1.lower().endswith(('.fastq', '.fq', '.fastq.gz', '.fq.gz')):
         print("Note: Input appears to be FASTQ. Switching to Read Mode.")
         preset = "map-ont" # Default to ONT, could be sr if user specified but for now auto-detect extension? 
         # Ideally we'd have a flag for short reads vs long reads. 
@@ -38,7 +43,7 @@ def main():
     
     if is_reads:
         # Read Mode: Map Reads (Query) -> Genes (Target)
-        run_minimap2(args.input, args.db, paf_file, args.threads, preset=preset, target_is_db=True)
+        run_minimap2(args.input1, args.db, paf_file, args.threads, preset=preset, target_is_db=True, input_file_2=args.input2)
         
         # 2. Parsing (Coverage Calculation)
         from lib.coverage import calculate_gene_coverage
@@ -46,7 +51,7 @@ def main():
         
     else:
         # Assembly Mode: Map Genes (Query) -> Genome (Target)
-        run_minimap2(args.input, args.db, paf_file, args.threads, preset=preset, target_is_db=False)
+        run_minimap2(args.input1, args.db, paf_file, args.threads, preset=preset, target_is_db=False)
         
         # 2. Parsing
         hits = parse_paf(paf_file)
@@ -93,7 +98,7 @@ def main():
         # Header
         writer.writerow(['Sample', 'Status', 'mecA_Present', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings'])
         # Data
-        sample_name = os.path.basename(args.input)
+        sample_name = os.path.basename(args.input1)
         genes_str = ",".join(result.get('genes_detected', []))
         warnings_str = "; ".join(result.get('warnings', []))
         writer.writerow([
