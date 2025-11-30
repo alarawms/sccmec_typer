@@ -35,10 +35,18 @@ def parse_paf(paf_file):
                 
                 # Filter
                 if identity >= 0.90 and coverage >= 0.80:
-                    # Parse query header (Gene Accession|Type)
-                    parts = query_name.split(" ")
-                    gene = parts[0]
-                    meta = parts[1] if len(parts) > 1 else ""
+                    # Parse query header (Gene__Accession|Type)
+                    # The database headers are now >Gene__Accession|Type to ensure unique IDs for minimap2
+                    if "__" in query_name:
+                        parts = query_name.split("__", 1)
+                        gene = parts[0]
+                        meta = parts[1]
+                    else:
+                        # Fallback for old format or unexpected headers
+                        parts = query_name.split(" ", 1)
+                        gene = parts[0]
+                        meta = parts[1] if len(parts) > 1 else ""
+
                     if "|" in meta:
                         accession, scc_type = meta.split("|", 1)
                     else:
