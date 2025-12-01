@@ -78,3 +78,6 @@ The tool generates three output files:
 1.  **`{prefix}.tsv`**: A summary table containing the Sample Name, Status, **mecA Presence**, SCCmec Type, Mec Complex, Ccr Complex, and Detected Genes.
 2.  **`{prefix}.json`**: A detailed JSON report with the full classification structure.
 3.  **`{prefix}_elements.csv`**: A detailed list of all detected genetic elements (genes), including their coordinates, identity, and coverage.
+
+also look at 
+https://github.com/rpetit3/sccmec
