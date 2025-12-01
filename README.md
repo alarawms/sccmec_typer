@@ -1,5 +1,7 @@
 # SCCmec Typer
-
+تحليل المحتوى الجيني للكاسيت الخاص بمقاومة الميثسيلين و البيتالاكتام عن طريق بروتين ب ب ب المعدل 
+  التطبيق  إلى فحص الجينوم او قراءات التسلسل الجينومي القصيرة او القراءات التسلسل الجينومي الطويلة لوجود اي جين من الجينات المكونة للكاسيت و من ثم تصنيفه الى الانواع المصفة عن طريق الجمعية الخاصة بتصنيف SCCmec
+  
 A robust, standalone bioinformatics tool for **Staphylococcal Cassette Chromosome mec (SCCmec)** typing in *Staphylococcus aureus* genomes. It uses `minimap2` for fast, accurate alignment and a component-based classification logic (identifying *mec* and *ccr* complexes) to determine the SCCmec type.
 
 ## Features
