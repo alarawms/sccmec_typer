@@ -17,7 +17,8 @@ def main():
     parser.add_argument("-d", "--db", required=True, help="Path to reference database (mfa)")
     parser.add_argument("-o", "--output", default="sccmec_results", help="Output prefix")
     parser.add_argument("--threads", type=int, default=4, help="Number of threads")
-    
+    parser.add_argument("--no-viz", action="store_true", help="Skip SVG/HTML visualization generation")
+
     args = parser.parse_args()
     
     print(f"Starting SCCmec Typer on {args.input1}...")
@@ -58,7 +59,10 @@ def main():
     
     # 3. Classification
     result = classify_sccmec(hits)
-    
+
+    from lib.confidence import enrich_result_with_confidence
+    result = enrich_result_with_confidence(result)
+
     # Output results
     import json
     import csv
@@ -112,6 +116,14 @@ def main():
             warnings_str
         ])
     print(f"TSV summary written to {tsv_output_file}")
+
+    # Visualization output
+    if not args.no_viz:
+        from lib.visualizer import write_visualization
+        sample_name = os.path.basename(args.input1)
+        svg_path, html_path = write_visualization(result, args.output, sample_name=sample_name)
+        print(f"SVG cassette diagram written to {svg_path}")
+        print(f"HTML report written to {html_path}")
 
 if __name__ == "__main__":
     main()

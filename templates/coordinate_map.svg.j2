@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ width }}" height="{{ height }}" viewBox="0 0 {{ width }} {{ height }}">
+  <style>
+    .track-label { font: bold 12px monospace; fill: #333; }
+    .bp-label { font: 9px monospace; fill: #999; }
+    .gene-label { font: 10px monospace; fill: #333; text-anchor: middle; }
+    .split-warning { font: 11px sans-serif; fill: #E74C3C; }
+  </style>
+
+  {% for track in tracks %}
+  <!-- Contig track: {{ track.contig }} -->
+  <text x="10" y="{{ track.y - 5 }}" class="track-label">
+    {{ track.contig }} ({{ "{:,}".format(track.length) }} bp)
+  </text>
+  <line x1="{{ track.x }}" y1="{{ track.y }}" x2="{{ track.x + track.w }}" y2="{{ track.y }}"
+        stroke="#CCC" stroke-width="2"/>
+
+  {% for gene in track.genes %}
+  <!-- Gene: {{ gene.name }} at {{ gene.start }}-{{ gene.end }} -->
+  {% if gene.strand == "+" %}
+  <polygon points="{{ gene.x }},{{ track.y - 10 }} {{ gene.x + gene.w - 6 }},{{ track.y - 10 }} {{ gene.x + gene.w }},{{ track.y }} {{ gene.x + gene.w - 6 }},{{ track.y + 10 }} {{ gene.x }},{{ track.y + 10 }}"
+           fill="{{ gene.color }}" opacity="{{ gene.opacity }}"/>
+  {% else %}
+  <polygon points="{{ gene.x + 6 }},{{ track.y - 10 }} {{ gene.x + gene.w }},{{ track.y - 10 }} {{ gene.x + gene.w }},{{ track.y + 10 }} {{ gene.x + 6 }},{{ track.y + 10 }} {{ gene.x }},{{ track.y }}"
+           fill="{{ gene.color }}" opacity="{{ gene.opacity }}"/>
+  {% endif %}
+  <text x="{{ gene.x + gene.w / 2 }}" y="{{ track.y - 15 }}" class="gene-label">{{ gene.name }}</text>
+  <text x="{{ gene.x + gene.w / 2 }}" y="{{ track.y + 25 }}" class="bp-label" text-anchor="middle">
+    {{ "{:,}".format(gene.start) }}
+  </text>
+  {% endfor %}
+  {% endfor %}
+
+  {% if is_split %}
+  <line x1="10" y1="{{ split_line_y }}" x2="{{ width - 10 }}" y2="{{ split_line_y }}"
+        stroke="#E74C3C" stroke-dasharray="8,4" stroke-width="1.5"/>
+  <text x="{{ width / 2 }}" y="{{ split_line_y + 18 }}" class="split-warning" text-anchor="middle">
+    &#x26A0; Split Assembly: components on separate contigs
+  </text>
+  {% endif %}
+</svg>
