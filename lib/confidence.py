@@ -5,8 +5,11 @@ import os
 def _load_rules():
     """Load classification rules for expected gene lookups."""
     rules_path = os.path.join(os.path.dirname(__file__), "../db/rules.json")
-    with open(rules_path, "r") as f:
-        return json.load(f)
+    try:
+        with open(rules_path, "r") as f:
+            return json.load(f)
+    except Exception as e:
+        raise RuntimeError(f"confidence.py: Failed to load rules.json: {e}") from e
 
 
 def _clamp(val, lo, hi):
@@ -207,7 +210,7 @@ def enrich_result_with_confidence(result):
         else:
             core_expected = mec_expected
 
-        orientation_undetermined = mec_complex == "Class C"
+        orientation_undetermined = mec_complex.startswith("Class C")
         mec_conf_score, mec_tier, mec_missing = compute_component_confidence(
             gene_score_map, core_expected,
             orientation_undetermined=orientation_undetermined,
