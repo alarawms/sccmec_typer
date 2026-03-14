@@ -2,121 +2,230 @@
     "mec_complex_rules": [
         {
             "name": "Class A",
-            "required": [
-                "mecA",
-                "mecR1",
-                "mecI"
-            ],
-            "description": "mecA + mecR1 + mecI"
+            "required": ["mecA", "mecR1", "mecI"],
+            "description": "IS431-mecA-mecR1(complete)-mecI",
+            "note": "Full regulatory region intact"
         },
         {
             "name": "Class B",
-            "required": [
-                "mecA",
-                "IS1272"
-            ],
-            "description": "mecA + IS1272 (mecR1 truncated)"
+            "required": ["mecA", "IS1272"],
+            "excluded": ["mecI"],
+            "description": "IS1272-mecA-mecR1(truncated)-IS431",
+            "note": "IS1272 insertion truncates mecR1; mecI must be absent"
         },
         {
-            "name": "Class C",
-            "required": [
-                "mecA"
-            ],
-            "any_of": [
-                "IS431",
-                "IS431_1",
-                "IS431_2"
-            ],
-            "description": "mecA + IS431"
+            "name": "Class C1",
+            "required": ["mecA"],
+            "any_of": ["IS431", "IS431_1", "IS431_2"],
+            "excluded": ["IS1272", "mecI"],
+            "orientation": "same",
+            "description": "IS431-mecA-mecR1(truncated)-IS431 (same orientation)",
+            "note": "Both IS431 copies in same orientation"
         },
         {
             "name": "Class C2",
-            "required": [
-                "mecC"
-            ],
-            "description": "mecC-associated"
+            "required": ["mecA"],
+            "any_of": ["IS431", "IS431_1", "IS431_2"],
+            "excluded": ["IS1272", "mecI"],
+            "orientation": "opposite",
+            "description": "IS431-mecA-mecR1(truncated)-IS431 (opposite orientation)",
+            "note": "IS431 copies in opposite orientations"
+        },
+        {
+            "name": "Class C",
+            "required": ["mecA"],
+            "any_of": ["IS431", "IS431_1", "IS431_2"],
+            "excluded": ["IS1272", "mecI"],
+            "description": "IS431-mecA-mecR1(truncated)-IS431 (orientation undetermined)",
+            "note": "Fallback when IS431 orientation cannot be resolved"
+        },
+        {
+            "name": "Class D",
+            "required": ["mecA"],
+            "excluded": ["IS1272", "mecI", "IS431", "IS431_1", "IS431_2"],
+            "requires_mecR1_truncated": true,
+            "description": "mecA-mecR1(truncated), no flanking IS elements",
+            "note": "mecR1 present but truncated, no IS431 or IS1272"
+        },
+        {
+            "name": "Class E",
+            "required": ["mecC"],
+            "description": "blaZ-mecC-mecR1-mecI",
+            "note": "mecC homolog with blaZ; formerly called 'mecC-associated'"
         },
         {
             "name": "Plasmid-borne (mecB)",
-            "required": [
-                "mecB"
-            ],
-            "description": "mecB-associated"
+            "required": ["mecB"],
+            "description": "Plasmid-encoded mecB",
+            "note": "Not chromosomally integrated SCCmec"
         },
         {
-            "name": "Class Unclear (mecA)",
-            "required": [
-                "mecA"
-            ],
-            "description": "mecA found but no complex markers"
+            "name": "Unclassifiable (mecA)",
+            "required": ["mecA"],
+            "description": "mecA detected but mec complex class cannot be determined",
+            "note": "Fallback when no IS or regulatory markers found"
         }
     ],
     "ccr_complex_rules": [
         {
             "name": "Type 1",
-            "match_substring": "1"
+            "required_genes": ["ccrA1", "ccrB1"],
+            "description": "ccrA1B1"
         },
         {
             "name": "Type 2",
-            "match_substring": "2"
+            "required_genes": ["ccrA2", "ccrB2"],
+            "description": "ccrA2B2"
         },
         {
             "name": "Type 3",
-            "match_substring": "3"
+            "required_genes": ["ccrA3", "ccrB3"],
+            "description": "ccrA3B3"
         },
         {
             "name": "Type 4",
-            "match_substring": "4"
+            "required_genes": ["ccrA4", "ccrB4"],
+            "description": "ccrA4B4"
         },
         {
             "name": "Type 5",
-            "match_substring": "5"
+            "required_genes": ["ccrC1"],
+            "description": "ccrC1 (single recombinase)"
+        },
+        {
+            "name": "Type 6",
+            "required_genes": ["ccrA4", "ccrB6"],
+            "description": "ccrA4B6",
+            "note": "Rare; reported in some CoNS"
+        },
+        {
+            "name": "Type 7",
+            "required_genes": ["ccrA1", "ccrB6"],
+            "description": "ccrA1B6"
         },
         {
             "name": "Type 8",
-            "match_substring": "8"
+            "required_genes": ["ccrA1", "ccrB3"],
+            "description": "ccrA1B3"
+        },
+        {
+            "name": "Type 9",
+            "required_genes": ["ccrC2"],
+            "description": "ccrC2 (single recombinase)"
         }
     ],
     "sccmec_type_rules": [
         {
             "name": "Type I",
+            "designation": "1B",
             "mec": "Class B",
-            "ccr": "Type 1"
+            "ccr": "Type 1",
+            "reference_strain": "NCTC10442"
         },
         {
             "name": "Type II",
+            "designation": "2A",
             "mec": "Class A",
-            "ccr": "Type 2"
+            "ccr": "Type 2",
+            "reference_strain": "N315"
         },
         {
             "name": "Type III",
+            "designation": "3A",
             "mec": "Class A",
-            "ccr": "Type 3"
+            "ccr": "Type 3",
+            "reference_strain": "85/2082"
         },
         {
             "name": "Type IV",
+            "designation": "2B",
             "mec": "Class B",
-            "ccr": "Type 2"
+            "ccr": "Type 2",
+            "reference_strain": "CA05"
         },
         {
             "name": "Type V",
-            "mec": "Class C",
-            "ccr": "Type 5"
+            "designation": "5C2",
+            "mec": "Class C2",
+            "ccr": "Type 5",
+            "reference_strain": "WIS"
         },
         {
             "name": "Type VI",
+            "designation": "4B",
             "mec": "Class B",
-            "ccr": "Type 4"
+            "ccr": "Type 4",
+            "reference_strain": "HDE288"
+        },
+        {
+            "name": "Type VII",
+            "designation": "5C1",
+            "mec": "Class C1",
+            "ccr": "Type 5",
+            "reference_strain": "JCSC6082"
+        },
+        {
+            "name": "Type VIII",
+            "designation": "4A",
+            "mec": "Class A",
+            "ccr": "Type 4",
+            "reference_strain": "C10682"
+        },
+        {
+            "name": "Type IX",
+            "designation": "1C2",
+            "mec": "Class C2",
+            "ccr": "Type 1",
+            "reference_strain": "JCSC6943"
+        },
+        {
+            "name": "Type X",
+            "designation": "7C1",
+            "mec": "Class C1",
+            "ccr": "Type 7",
+            "reference_strain": "JCSC6945"
         },
         {
             "name": "Type XI",
+            "designation": "8E",
+            "mec": "Class E",
+            "ccr": "Type 8",
+            "reference_strain": "LGA251"
+        },
+        {
+            "name": "Type XII",
+            "designation": "9C2",
             "mec": "Class C2",
-            "ccr": "ANY"
+            "ccr": "Type 9",
+            "reference_strain": "BA01611"
+        },
+        {
+            "name": "Type XIII",
+            "designation": "9A",
+            "mec": "Class A",
+            "ccr": "Type 9",
+            "reference_strain": "55-99-44"
+        },
+        {
+            "name": "Type XIV",
+            "designation": "5A",
+            "mec": "Class A",
+            "ccr": "Type 5",
+            "reference_strain": "SC792"
+        },
+        {
+            "name": "Type XV",
+            "designation": "7A",
+            "mec": "Class A",
+            "ccr": "Type 7",
+            "reference_strain": "NV_1"
         },
         {
             "name": "n/a (Plasmid)",
+            "designation": "n/a",
             "mec": "Plasmid-borne (mecB)",
-            "ccr": "ANY"
+            "ccr": "ANY",
+            "reference_strain": "n/a"
         }
     ]
 }
