@@ -42,7 +42,11 @@
 <body>
   <div class="header">
     <h1>SCCmec Typing Report: {{ sample_name }}</h1>
-    {% if status == "Negative" %}
+    {% if status != "Negative" and estimation %}
+    <span class="type-badge medium">
+      {{ sccmec_type }} — Best estimate: {{ estimation.best_guess }} ({{ "%.0f"|format(estimation.best_guess_score * 100) }}%)
+    </span>
+    {% elif status == "Negative" %}
     <span class="type-badge na">No SCCmec Detected</span>
     {% else %}
     <span class="type-badge {{ confidence_tier_class }}">
@@ -101,6 +105,34 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+  {% endif %}
+
+  {% if estimation %}
+  <div class="card">
+    <h2>Closest Type Estimation</h2>
+    <p style="font-style: italic; color: #666; margin-bottom: 12px;">
+      {{ estimation.note }}
+    </p>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Type</th><th>Score</th><th>Status</th><th>Ruling</th></tr>
+      </thead>
+      <tbody>
+        {% for candidate in estimation.candidates %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td><strong>{{ candidate.type }}</strong> ({{ candidate.designation }})</td>
+          <td class="conf-{{ 'high' if candidate.score > 0.7 else ('medium' if candidate.score >= 0.4 else 'low') }}">{{ "%.0f"|format(candidate.score * 100) }}%</td>
+          <td>{{ candidate.status }}</td>
+          <td>{{ candidate.ruling }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if estimation.sub_threshold_genes_used %}
+    <p style="margin-top: 8px; font-size: 12px; color: #999;">Sub-threshold genes used: {{ estimation.sub_threshold_genes_used | join(", ") }}</p>
+    {% endif %}
   </div>
   {% endif %}
 

@@ -365,6 +365,7 @@ def generate_report_html(result, sample_name="sample"):
         coordinate_map_svg=coord_svg,
         gene_table=gene_table if gene_table else None,
         warnings=result.get("warnings", []),
+        estimation=result.get("estimation"),
     )
 
 

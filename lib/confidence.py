@@ -132,7 +132,7 @@ def _is_ccr_any(sccmec_type, rules):
     return False
 
 
-def enrich_result_with_confidence(result):
+def enrich_result_with_confidence(result, soft_hits=None):
     """Add confidence scores, assembly block, and designation to a classifier result.
 
     This function handles all result statuses (Positive, Negative, Partial, Error)
@@ -166,6 +166,7 @@ def enrich_result_with_confidence(result):
             "split_penalty_applied": False,
             "gene_locations": [],
         }
+        result["estimation"] = None
         return result
 
     rules = _load_rules()
@@ -304,5 +305,14 @@ def enrich_result_with_confidence(result):
         "split_penalty_applied": is_split,
         "gene_locations": gene_locations,
     }
+
+    # --- Estimation for non-Positive results ---
+    from lib.estimator import estimate_closest_types
+    estimation = estimate_closest_types(
+        result,
+        result.get("hits_summary", []),
+        soft_hits or [],
+    )
+    result["estimation"] = estimation
 
     return result

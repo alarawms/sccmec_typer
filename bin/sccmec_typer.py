@@ -48,20 +48,20 @@ def main():
         
         # 2. Parsing (Coverage Calculation)
         from lib.coverage import calculate_gene_coverage
-        hits = calculate_gene_coverage(paf_file)
+        hits, soft_hits = calculate_gene_coverage(paf_file)
         
     else:
         # Assembly Mode: Map Genes (Query) -> Genome (Target)
         run_minimap2(args.input1, args.db, paf_file, args.threads, preset=preset, target_is_db=False)
         
         # 2. Parsing
-        hits = parse_paf(paf_file)
+        hits, soft_hits = parse_paf(paf_file)
     
     # 3. Classification
     result = classify_sccmec(hits)
 
     from lib.confidence import enrich_result_with_confidence
-    result = enrich_result_with_confidence(result)
+    result = enrich_result_with_confidence(result, soft_hits=soft_hits)
 
     # Output results
     import json
@@ -100,11 +100,16 @@ def main():
     with open(tsv_output_file, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         # Header
-        writer.writerow(['Sample', 'Status', 'mecA_Present', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings'])
+        writer.writerow(['Sample', 'Status', 'mecA_Present', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score'])
         # Data
         sample_name = os.path.basename(args.input1)
         genes_str = ",".join(result.get('genes_detected', []))
         warnings_str = "; ".join(result.get('warnings', []))
+        est_type = ""
+        est_score = ""
+        if result.get("estimation"):
+            est_type = result["estimation"].get("best_guess", "")
+            est_score = f"{result['estimation'].get('best_guess_score', 0):.2f}"
         writer.writerow([
             sample_name,
             result.get('status', 'Unknown'),
@@ -113,7 +118,9 @@ def main():
             result.get('mec_complex', 'Unknown'),
             result.get('ccr_complex', 'Unknown'),
             genes_str,
-            warnings_str
+            warnings_str,
+            est_type,
+            est_score
         ])
     print(f"TSV summary written to {tsv_output_file}")
 

@@ -165,6 +165,34 @@ Tiers: **High** (>0.70), **Medium** (0.40–0.70), **Low** (<0.40)
 
 See `docs/confidence_scoring_methods.md` for full methodology.
 
+### Closest-Type Estimation
+
+When the type cannot be definitively assigned (Unknown, Partial, or Composite), the tool estimates the most likely type(s) using weighted component matching. It also examines **sub-threshold hits** (genes detected at 70–90% identity or 50–80% coverage) to provide evidence for near-miss classifications.
+
+| Gene Category | Weight | Examples |
+|---------------|--------|---------|
+| Critical (mec gene) | 1.0 | mecA, mecC, mecB |
+| High (ccr genes) | 0.8 | ccrA2, ccrB2, ccrC1 |
+| Moderate (regulators) | 0.5 | mecR1, mecI |
+| Low (IS elements) | 0.3 | IS431, IS1272 |
+
+Top 3 candidates are ranked with a differential diagnosis explaining why each was or wasn't matched.
+
+**JSON output** (for Staphit/Staphit2 integration):
+```python
+# Quick access for pipeline integration
+if result.get("estimation"):
+    estimated_type = result["estimation"]["best_guess"]           # e.g., "Type IV"
+    designation = result["estimation"]["best_guess_designation"]   # e.g., "2B"
+    score = result["estimation"]["best_guess_score"]               # e.g., 0.82
+    ruling = result["estimation"]["best_guess_ruling"]             # human-readable
+    candidates = result["estimation"]["candidates"]               # top 3 ranked
+```
+
+When `estimation` is `null`, the type was either definitively assigned (Positive) or no genes were found (Negative).
+
+**TSV output** adds two columns: `Estimated_Type` and `Estimation_Score` (empty for Positive/Negative results).
+
 ## Classification Algorithm
 
 1. **Align** reference gene sequences against the input genome using minimap2

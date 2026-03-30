@@ -1,11 +1,15 @@
 import csv
 from collections import defaultdict
 
+SOFT_HIT_MIN_COVERAGE = 0.50
+
 def calculate_gene_coverage(paf_file, min_coverage=0.90):
     """
     Parses a PAF file where Target = Genes and Query = Reads.
     Calculates the breadth of coverage for each gene.
-    Returns a list of "hits" (genes with > min_coverage).
+    Returns a (hits, soft_hits) tuple where:
+      - hits: genes with breadth >= min_coverage
+      - soft_hits: genes with breadth >= SOFT_HIT_MIN_COVERAGE but < min_coverage
     """
     gene_intervals = defaultdict(list)
     gene_lengths = {}
@@ -32,10 +36,11 @@ def calculate_gene_coverage(paf_file, min_coverage=0.90):
                 gene_intervals[target_name].append((target_start, target_end))
                 
     except FileNotFoundError:
-        return []
+        return [], []
 
     hits = []
-    
+    soft_hits = []
+
     for gene, intervals in gene_intervals.items():
         # Merge overlapping intervals
         intervals.sort(key=lambda x: x[0])
@@ -57,7 +62,10 @@ def calculate_gene_coverage(paf_file, min_coverage=0.90):
         
         breadth = covered_len / total_len if total_len > 0 else 0
         
-        if breadth >= min_coverage:
+        is_hard = breadth >= min_coverage
+        is_soft = not is_hard and breadth >= SOFT_HIT_MIN_COVERAGE
+
+        if is_hard or is_soft:
             # Parse gene name for classification compatibility
             # DB headers: Gene__Accession|Type
             if "__" in gene:
@@ -74,7 +82,7 @@ def calculate_gene_coverage(paf_file, min_coverage=0.90):
             else:
                 accession, scc_type = meta, "Unknown"
 
-            hits.append({
+            hit = {
                 "gene": gene_short,
                 "accession": accession,
                 "scc_type": scc_type,
@@ -87,6 +95,11 @@ def calculate_gene_coverage(paf_file, min_coverage=0.90):
                 "len": total_len,
                 "aln_len": covered_len,
                 "breadth": breadth
-            })
-            
-    return hits
+            }
+
+            if is_hard:
+                hits.append(hit)
+            else:
+                soft_hits.append(hit)
+
+    return hits, soft_hits
