@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCCmec Report: USA300.fna</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: #f8f9fa; color: #333; padding: 20px; max-width: 1000px; margin: 0 auto; }
+  .header { background: white; border-radius: 8px; padding: 24px; margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .header h1 { font-size: 20px; margin-bottom: 8px; }
+  .type-badge { display: inline-block; padding: 6px 16px; border-radius: 20px;
+                font-weight: bold; font-size: 14px; color: white; }
+  .type-badge.high { background: #27AE60; }
+  .type-badge.medium { background: #F39C12; }
+  .type-badge.low { background: #E74C3C; }
+  .type-badge.na { background: #95A5A6; }
+  .summary { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .summary dt { font-weight: 600; color: #666; font-size: 12px; text-transform: uppercase; }
+  .summary dd { font-size: 14px; margin-bottom: 8px; }
+  .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 16px;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .card h2 { font-size: 16px; margin-bottom: 12px; color: #555; }
+  .card svg { width: 100%; height: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: #f1f3f5; padding: 8px 12px; text-align: left; font-weight: 600;
+       border-bottom: 2px solid #dee2e6; }
+  td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+  tr:hover td { background: #f8f9fa; }
+  .conf-high { color: #27AE60; font-weight: bold; }
+  .conf-medium { color: #F39C12; font-weight: bold; }
+  .conf-low { color: #E74C3C; font-weight: bold; }
+  .warning { background: #FFF3CD; border: 1px solid #FFEEBA; border-radius: 6px;
+             padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+  .warning::before { content: "\26A0  "; }
+  .footer { text-align: center; color: #999; font-size: 11px; margin-top: 20px; }
+  .confidence-note { font-style: italic; color: #999; font-size: 12px; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>SCCmec Typing Report: USA300.fna</h1>
+    
+    <span class="type-badge high">
+      Type IV (2B)
+      — High 70%
+    </span>
+    
+    <dl class="summary">
+      <dt>Status</dt><dd>Positive</dd>
+      <dt>mec Complex</dt><dd>Class B</dd>
+      <dt>ccr Complex</dt><dd>Type 2</dd>
+      <dt>mecA</dt><dd>Present</dd>
+    </dl>
+    
+  </div>
+
+  
+  <div class="warning">Split Assembly: Components found on 2 different contigs: NC_007792.1, NC_007793.1</div>
+  
+
+  <div class="card">
+    <h2>Schematic Cassette Diagram</h2>
+    <?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="185" viewBox="0 0 900 185">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="currentColor"/>
+    </marker>
+    <marker id="arrowhead-rev" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto">
+      <polygon points="8 0, 0 3, 8 6" fill="currentColor"/>
+    </marker>
+  </defs>
+
+  <style>
+    .title { font: bold 16px sans-serif; fill: #333; }
+    .subtitle { font: 13px sans-serif; fill: #666; }
+    .gene-label { font: 11px monospace; fill: #333; }
+    .region-label { font: 10px sans-serif; fill: #999; text-anchor: middle; }
+    .badge { font: bold 10px sans-serif; }
+    .confidence-note { font: italic 10px sans-serif; fill: #999; }
+    .warning-text { font: 11px sans-serif; fill: #E74C3C; }
+    .missing { stroke-dasharray: 5,3; fill: none; stroke-width: 2; }
+  </style>
+
+  <!-- Title banner -->
+  <text x="20" y="30" class="title">
+    SCCmec Type IV (2B)
+  </text>
+  <text x="20" y="50" class="subtitle">
+    mec: Class B | ccr: Type 2 | Confidence: High (0.70)
+  </text>
+
+  <!-- Confidence badge -->
+  <rect x="780" y="15" width="100" height="28" rx="4"
+        fill="#27AE60" opacity="0.9"/>
+  <text x="830" y="34" text-anchor="middle" class="badge" fill="white">
+    High 70%
+  </text>
+
+  <!-- J region backgrounds -->
+  
+  <rect x="58" y="75" width="40" height="30"
+        fill="#F0F0F0" rx="2"/>
+  <text x="78.0" y="117" class="region-label">
+    J3
+  </text>
+  
+  <rect x="280.0" y="75" width="40" height="30"
+        fill="#F0F0F0" rx="2"/>
+  <text x="300.0" y="117" class="region-label">
+    J2
+  </text>
+  
+  <rect x="850.0" y="75" width="40" height="30"
+        fill="#F0F0F0" rx="2"/>
+  <text x="870.0" y="117" class="region-label">
+    J1
+  </text>
+  
+
+  <!-- DR boundaries -->
+  
+  <polygon points="20,78 50,90 20,102" fill="#DC143C" opacity="0.8"/>
+  
+  <polygon points="898.0,78 928.0,90 898.0,102" fill="#DC143C" opacity="0.8"/>
+  
+
+  <!-- Gene arrows -->
+  
+  
+  <rect x="106" y="78" width="79.0" height="24"
+        fill="#7B68EE" opacity="0.84" rx="2"/>
+  
+  <polygon points="106,78 179.0,78 185.0,90 179.0,102 106,102" fill="#7B68EE" opacity="0.84"/>
+  
+  
+  <text x="145.5" y="74" class="gene-label" text-anchor="middle">
+    ccrA2 [c1]
+  </text>
+  
+  <text x="145.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    84%
+  </text>
+  
+  
+  
+  <rect x="193.0" y="78" width="79.0" height="24"
+        fill="#7B68EE" opacity="0.812" rx="2"/>
+  
+  <polygon points="193.0,78 266.0,78 272.0,90 266.0,102 193.0,102" fill="#7B68EE" opacity="0.812"/>
+  
+  
+  <text x="232.5" y="74" class="gene-label" text-anchor="middle">
+    ccrB2 [c1]
+  </text>
+  
+  <text x="232.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    81%
+  </text>
+  
+  
+  
+  <rect x="328.0" y="78" width="79.0" height="24"
+        fill="#95A5A6" opacity="1.0" rx="2"/>
+  
+  <polygon points="328.0,78 401.0,78 407.0,90 401.0,102 328.0,102" fill="#95A5A6" opacity="1.0"/>
+  
+  
+  <text x="367.5" y="74" class="gene-label" text-anchor="middle">
+    IS1272 [c1]
+  </text>
+  
+  <text x="367.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    100%
+  </text>
+  
+  
+  
+  <rect x="415.0" y="78" width="79.0" height="24"
+        fill="#95A5A6" opacity="1.0" rx="2"/>
+  
+  <polygon points="415.0,78 488.0,78 494.0,90 488.0,102 415.0,102" fill="#95A5A6" opacity="1.0"/>
+  
+  
+  <text x="454.5" y="74" class="gene-label" text-anchor="middle">
+    IS431 [c1]
+  </text>
+  
+  <text x="454.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    100%
+  </text>
+  
+  
+  
+  <rect x="502.0" y="78" width="79.0" height="24"
+        fill="#95A5A6" opacity="1.0" rx="2"/>
+  
+  <polygon points="502.0,78 575.0,78 581.0,90 575.0,102 502.0,102" fill="#95A5A6" opacity="1.0"/>
+  
+  
+  <text x="541.5" y="74" class="gene-label" text-anchor="middle">
+    IS431_1 [c1]
+  </text>
+  
+  <text x="541.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    100%
+  </text>
+  
+  
+  
+  <rect x="589.0" y="78" width="79.0" height="24"
+        fill="#95A5A6" opacity="1.0" rx="2"/>
+  
+  <polygon points="589.0,78 662.0,78 668.0,90 662.0,102 589.0,102" fill="#95A5A6" opacity="1.0"/>
+  
+  
+  <text x="628.5" y="74" class="gene-label" text-anchor="middle">
+    IS431_2 [c1]
+  </text>
+  
+  <text x="628.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    100%
+  </text>
+  
+  
+  
+  <rect x="676.0" y="78" width="79.0" height="24"
+        fill="#DC143C" opacity="1.0" rx="2"/>
+  
+  <polygon points="676.0,78 749.0,78 755.0,90 749.0,102 676.0,102" fill="#DC143C" opacity="1.0"/>
+  
+  
+  <text x="715.5" y="74" class="gene-label" text-anchor="middle">
+    mecA [c1]
+  </text>
+  
+  <text x="715.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    100%
+  </text>
+  
+  
+  
+  <rect x="763.0" y="78" width="79.0" height="24"
+        fill="#E8A0BF" opacity="1.0" rx="2"/>
+  
+  <polygon points="763.0,78 836.0,78 842.0,90 836.0,102 763.0,102" fill="#E8A0BF" opacity="1.0"/>
+  
+  
+  <text x="802.5" y="74" class="gene-label" text-anchor="middle">
+    mecR1 [c1]
+  </text>
+  
+  <text x="802.5" y="114" class="gene-label" text-anchor="middle"
+        fill="#27AE60">
+    100%
+  </text>
+  
+  
+
+  <!-- Component confidence badges -->
+  
+  <text x="550.0" y="140" class="badge" fill="#27AE60">
+    mec (Class B): High (1.00)
+  </text>
+  
+  <text x="100" y="140" class="badge" fill="#27AE60">
+    ccr (Type 2): High (0.83)
+  </text>
+  
+
+  <!-- Warnings -->
+  
+  <text x="20" y="165" class="warning-text">&#x26A0; Split Assembly: Components found on 2 different contigs: NC_007792.1, NC_007793.1</text>
+  
+
+  
+</svg>
+  </div>
+
+  
+  <div class="card">
+    <h2>Genomic Coordinate Map</h2>
+    <?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260">
+  <style>
+    .track-label { font: bold 12px monospace; fill: #333; }
+    .bp-label { font: 9px monospace; fill: #999; }
+    .gene-label { font: 10px monospace; fill: #333; text-anchor: middle; }
+    .split-warning { font: 11px sans-serif; fill: #E74C3C; }
+  </style>
+
+  
+  <!-- Contig track: NC_007792.1 -->
+  <text x="10" y="45" class="track-label">
+    NC_007792.1 (24,031 bp)
+  </text>
+  <line x1="60" y1="50" x2="840" y2="50"
+        stroke="#CCC" stroke-width="2"/>
+
+  
+  <!-- Gene: IS431_1 at 1122-1770 -->
+  
+  <polygon points="60.0,40 76.06294469422498,40 82.06294469422498,50 76.06294469422498,60 60.0,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="71.03147234711248" y="35" class="gene-label">IS431_1</text>
+  <text x="71.03147234711248" y="75" class="bp-label" text-anchor="middle">
+    1,122
+  </text>
+  
+  <!-- Gene: IS431_1 at 1122-1853 -->
+  
+  <polygon points="66.0,40 84.8889082893186,40 84.8889082893186,60 66.0,60 60.0,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="72.4444541446593" y="35" class="gene-label">IS431_1</text>
+  <text x="72.4444541446593" y="75" class="bp-label" text-anchor="middle">
+    1,122
+  </text>
+  
+  <!-- Gene: IS431 at 5676-6450 -->
+  
+  <polygon points="215.0534724344144,40 235.40643415251645,40 241.40643415251645,50 235.40643415251645,60 215.0534724344144,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.22995329346543" y="35" class="gene-label">IS431</text>
+  <text x="228.22995329346543" y="75" class="bp-label" text-anchor="middle">
+    5,676
+  </text>
+  
+  <!-- Gene: IS431 at 5676-6450 -->
+  
+  <polygon points="215.0534724344144,40 235.40643415251645,40 241.40643415251645,50 235.40643415251645,60 215.0534724344144,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.22995329346543" y="35" class="gene-label">IS431</text>
+  <text x="228.22995329346543" y="75" class="bp-label" text-anchor="middle">
+    5,676
+  </text>
+  
+  <!-- Gene: IS431 at 5676-6450 -->
+  
+  <polygon points="215.0534724344144,40 235.40643415251645,40 241.40643415251645,50 235.40643415251645,60 215.0534724344144,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.22995329346543" y="35" class="gene-label">IS431</text>
+  <text x="228.22995329346543" y="75" class="bp-label" text-anchor="middle">
+    5,676
+  </text>
+  
+  <!-- Gene: IS431 at 5676-6450 -->
+  
+  <polygon points="215.0534724344144,40 235.40643415251645,40 241.40643415251645,50 235.40643415251645,60 215.0534724344144,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.22995329346543" y="35" class="gene-label">IS431</text>
+  <text x="228.22995329346543" y="75" class="bp-label" text-anchor="middle">
+    5,676
+  </text>
+  
+  <!-- Gene: IS431 at 5676-6450 -->
+  
+  <polygon points="215.0534724344144,40 235.40643415251645,40 241.40643415251645,50 235.40643415251645,60 215.0534724344144,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.22995329346543" y="35" class="gene-label">IS431</text>
+  <text x="228.22995329346543" y="75" class="bp-label" text-anchor="middle">
+    5,676
+  </text>
+  
+  <!-- Gene: IS431 at 5676-6450 -->
+  
+  <polygon points="221.0534724344144,40 241.40643415251645,40 241.40643415251645,60 221.0534724344144,60 215.0534724344144,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.22995329346543" y="35" class="gene-label">IS431</text>
+  <text x="228.22995329346543" y="75" class="bp-label" text-anchor="middle">
+    5,676
+  </text>
+  
+  <!-- Gene: IS431_1 at 5677-6361 -->
+  
+  <polygon points="215.08752018857217,40 232.37618403247632,40 238.37618403247632,50 232.37618403247632,60 215.08752018857217,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="226.73185211052424" y="35" class="gene-label">IS431_1</text>
+  <text x="226.73185211052424" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431_1 at 5677-6450 -->
+  
+  <polygon points="215.08752018857217,40 235.40643415251648,40 241.40643415251648,50 235.40643415251648,60 215.08752018857217,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.2469771705443" y="35" class="gene-label">IS431_1</text>
+  <text x="228.2469771705443" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431_1 at 5677-6450 -->
+  
+  <polygon points="221.08752018857217,40 241.40643415251648,40 241.40643415251648,60 221.08752018857217,60 215.08752018857217,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.2469771705443" y="35" class="gene-label">IS431_1</text>
+  <text x="228.2469771705443" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431_2 at 5677-6466 -->
+  
+  <polygon points="221.08752018857217,40 241.95119821904055,40 241.95119821904055,60 221.08752018857217,60 215.08752018857217,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.51935920380635" y="35" class="gene-label">IS431_2</text>
+  <text x="228.51935920380635" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431_2 at 5677-6450 -->
+  
+  <polygon points="215.08752018857217,40 235.40643415251648,40 241.40643415251648,50 235.40643415251648,60 215.08752018857217,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.2469771705443" y="35" class="gene-label">IS431_2</text>
+  <text x="228.2469771705443" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431_2 at 5677-6450 -->
+  
+  <polygon points="215.08752018857217,40 235.40643415251648,40 241.40643415251648,50 235.40643415251648,60 215.08752018857217,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.2469771705443" y="35" class="gene-label">IS431_2</text>
+  <text x="228.2469771705443" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431 at 5677-6450 -->
+  
+  <polygon points="221.08752018857217,40 241.40643415251648,40 241.40643415251648,60 221.08752018857217,60 215.08752018857217,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.2469771705443" y="35" class="gene-label">IS431</text>
+  <text x="228.2469771705443" y="75" class="bp-label" text-anchor="middle">
+    5,677
+  </text>
+  
+  <!-- Gene: IS431_1 at 5733-6408 -->
+  
+  <polygon points="222.99419442140643,40 239.97642847789078,40 239.97642847789078,60 222.99419442140643,60 216.99419442140643,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.4853114496486" y="35" class="gene-label">IS431_1</text>
+  <text x="228.4853114496486" y="75" class="bp-label" text-anchor="middle">
+    5,733
+  </text>
+  
+  <!-- Gene: IS431_2 at 5733-6408 -->
+  
+  <polygon points="222.99419442140643,40 239.97642847789078,40 239.97642847789078,60 222.99419442140643,60 216.99419442140643,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.4853114496486" y="35" class="gene-label">IS431_2</text>
+  <text x="228.4853114496486" y="75" class="bp-label" text-anchor="middle">
+    5,733
+  </text>
+  
+  <!-- Gene: IS431 at 5733-6388 -->
+  
+  <polygon points="216.99419442140643,40 233.2954733947357,40 239.2954733947357,50 233.2954733947357,60 216.99419442140643,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.14483390807106" y="35" class="gene-label">IS431</text>
+  <text x="228.14483390807106" y="75" class="bp-label" text-anchor="middle">
+    5,733
+  </text>
+  
+  <!-- Gene: IS431 at 5733-6408 -->
+  
+  <polygon points="222.99419442140643,40 239.97642847789078,40 239.97642847789078,60 222.99419442140643,60 216.99419442140643,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="228.4853114496486" y="35" class="gene-label">IS431</text>
+  <text x="228.4853114496486" y="75" class="bp-label" text-anchor="middle">
+    5,733
+  </text>
+  
+  <!-- Gene: IS431_1 at 8839-9523 -->
+  
+  <polygon points="322.7465188353922,40 340.0351826792963,40 346.0351826792963,50 340.0351826792963,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="334.39085075734425" y="35" class="gene-label">IS431_1</text>
+  <text x="334.39085075734425" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431_1 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431_1</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431_1 at 8839-9612 -->
+  
+  <polygon points="328.7465188353922,40 349.0654327993365,40 349.0654327993365,60 328.7465188353922,60 322.7465188353922,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431_1</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431_2 at 8839-9628 -->
+  
+  <polygon points="328.7465188353922,40 349.61019686586053,40 349.61019686586053,60 328.7465188353922,60 322.7465188353922,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="336.17835785062636" y="35" class="gene-label">IS431_2</text>
+  <text x="336.17835785062636" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431_2 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431_2</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431_2 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431_2</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="322.7465188353922,40 343.0654327993365,40 349.0654327993365,50 343.0654327993365,60 322.7465188353922,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="328.7465188353922,40 349.0654327993365,40 349.0654327993365,60 328.7465188353922,60 322.7465188353922,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431 at 8839-9612 -->
+  
+  <polygon points="328.7465188353922,40 349.0654327993365,40 349.0654327993365,60 328.7465188353922,60 322.7465188353922,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.9059758173643" y="35" class="gene-label">IS431</text>
+  <text x="335.9059758173643" y="75" class="bp-label" text-anchor="middle">
+    8,839
+  </text>
+  
+  <!-- Gene: IS431_1 at 8895-9570 -->
+  
+  <polygon points="330.65319306822647,40 347.6354271247108,40 347.6354271247108,60 330.65319306822647,60 324.65319306822647,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="336.14431009646864" y="35" class="gene-label">IS431_1</text>
+  <text x="336.14431009646864" y="75" class="bp-label" text-anchor="middle">
+    8,895
+  </text>
+  
+  <!-- Gene: IS431_2 at 8895-9570 -->
+  
+  <polygon points="330.65319306822647,40 347.6354271247108,40 347.6354271247108,60 330.65319306822647,60 324.65319306822647,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="336.14431009646864" y="35" class="gene-label">IS431_2</text>
+  <text x="336.14431009646864" y="75" class="bp-label" text-anchor="middle">
+    8,895
+  </text>
+  
+  <!-- Gene: IS431 at 8895-9550 -->
+  
+  <polygon points="324.65319306822647,40 340.95447204155573,40 346.95447204155573,50 340.95447204155573,60 324.65319306822647,60"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="335.8038325548911" y="35" class="gene-label">IS431</text>
+  <text x="335.8038325548911" y="75" class="bp-label" text-anchor="middle">
+    8,895
+  </text>
+  
+  <!-- Gene: IS431 at 8895-9570 -->
+  
+  <polygon points="330.65319306822647,40 347.6354271247108,40 347.6354271247108,60 330.65319306822647,60 324.65319306822647,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="336.14431009646864" y="35" class="gene-label">IS431</text>
+  <text x="336.14431009646864" y="75" class="bp-label" text-anchor="middle">
+    8,895
+  </text>
+  
+  <!-- Gene: IS431_1 at 23242-24015 -->
+  
+  <polygon points="819.1363219695315,40 839.4552359334758,40 839.4552359334758,60 819.1363219695315,60 813.1363219695315,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="826.2957789515037" y="35" class="gene-label">IS431_1</text>
+  <text x="826.2957789515037" y="75" class="bp-label" text-anchor="middle">
+    23,242
+  </text>
+  
+  <!-- Gene: IS431_2 at 23242-24031 -->
+  
+  <polygon points="819.1363219695315,40 840.0,40 840.0,60 819.1363219695315,60 813.1363219695315,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="826.5681609847658" y="35" class="gene-label">IS431_2</text>
+  <text x="826.5681609847658" y="75" class="bp-label" text-anchor="middle">
+    23,242
+  </text>
+  
+  <!-- Gene: IS431_2 at 23298-23973 -->
+  
+  <polygon points="821.0429962023659,40 838.0252302588502,40 838.0252302588502,60 821.0429962023659,60 815.0429962023659,50"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="826.5341132306081" y="35" class="gene-label">IS431_2</text>
+  <text x="826.5341132306081" y="75" class="bp-label" text-anchor="middle">
+    23,298
+  </text>
+  
+  
+  <!-- Contig track: NC_007793.1 -->
+  <text x="10" y="145" class="track-label">
+    NC_007793.1 (77,001 bp)
+  </text>
+  <line x1="60" y1="150" x2="840" y2="150"
+        stroke="#CCC" stroke-width="2"/>
+
+  
+  <!-- Gene: IS431_1 at 35817-36607 -->
+  
+  <polygon points="66.0,140 74.96212121212122,140 74.96212121212122,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.48106060606061" y="135" class="gene-label">IS431_1</text>
+  <text x="67.48106060606061" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431_1 at 35817-36607 -->
+  
+  <polygon points="60.0,140 68.96212121212122,140 74.96212121212122,150 68.96212121212122,160 60.0,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.48106060606061" y="135" class="gene-label">IS431_1</text>
+  <text x="67.48106060606061" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431_2 at 35817-36607 -->
+  
+  <polygon points="66.0,140 74.96212121212122,140 74.96212121212122,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.48106060606061" y="135" class="gene-label">IS431_2</text>
+  <text x="67.48106060606061" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431_2 at 35817-36607 -->
+  
+  <polygon points="66.0,140 74.96212121212122,140 74.96212121212122,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.48106060606061" y="135" class="gene-label">IS431_2</text>
+  <text x="67.48106060606061" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36608 -->
+  
+  <polygon points="66.0,140 74.98106060606061,140 74.98106060606061,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.4905303030303" y="135" class="gene-label">IS431</text>
+  <text x="67.4905303030303" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36608 -->
+  
+  <polygon points="66.0,140 74.98106060606061,140 74.98106060606061,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.4905303030303" y="135" class="gene-label">IS431</text>
+  <text x="67.4905303030303" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36608 -->
+  
+  <polygon points="66.0,140 74.98106060606061,140 74.98106060606061,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.4905303030303" y="135" class="gene-label">IS431</text>
+  <text x="67.4905303030303" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36608 -->
+  
+  <polygon points="66.0,140 74.98106060606061,140 74.98106060606061,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.4905303030303" y="135" class="gene-label">IS431</text>
+  <text x="67.4905303030303" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36608 -->
+  
+  <polygon points="66.0,140 74.98106060606061,140 74.98106060606061,160 66.0,160 60.0,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.4905303030303" y="135" class="gene-label">IS431</text>
+  <text x="67.4905303030303" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36608 -->
+  
+  <polygon points="60.0,140 68.98106060606061,140 74.98106060606061,150 68.98106060606061,160 60.0,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.4905303030303" y="135" class="gene-label">IS431</text>
+  <text x="67.4905303030303" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431 at 35817-36607 -->
+  
+  <polygon points="60.0,140 68.96212121212122,140 74.96212121212122,150 68.96212121212122,160 60.0,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.48106060606061" y="135" class="gene-label">IS431</text>
+  <text x="67.48106060606061" y="175" class="bp-label" text-anchor="middle">
+    35,817
+  </text>
+  
+  <!-- Gene: IS431_2 at 35834-36607 -->
+  
+  <polygon points="60.321969696969695,140 68.96212121212122,140 74.96212121212122,150 68.96212121212122,160 60.321969696969695,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.64204545454545" y="135" class="gene-label">IS431_2</text>
+  <text x="67.64204545454545" y="175" class="bp-label" text-anchor="middle">
+    35,834
+  </text>
+  
+  <!-- Gene: IS431_1 at 35876-36551 -->
+  
+  <polygon points="61.11742424242424,140 67.90151515151516,140 73.90151515151516,150 67.90151515151516,160 61.11742424242424,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.5094696969697" y="135" class="gene-label">IS431_1</text>
+  <text x="67.5094696969697" y="175" class="bp-label" text-anchor="middle">
+    35,876
+  </text>
+  
+  <!-- Gene: IS431_2 at 35876-36551 -->
+  
+  <polygon points="61.11742424242424,140 67.90151515151516,140 73.90151515151516,150 67.90151515151516,160 61.11742424242424,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.5094696969697" y="135" class="gene-label">IS431_2</text>
+  <text x="67.5094696969697" y="175" class="bp-label" text-anchor="middle">
+    35,876
+  </text>
+  
+  <!-- Gene: IS431 at 35876-36551 -->
+  
+  <polygon points="61.11742424242424,140 67.90151515151516,140 73.90151515151516,150 67.90151515151516,160 61.11742424242424,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.5094696969697" y="135" class="gene-label">IS431</text>
+  <text x="67.5094696969697" y="175" class="bp-label" text-anchor="middle">
+    35,876
+  </text>
+  
+  <!-- Gene: IS431 at 35896-36551 -->
+  
+  <polygon points="67.49621212121212,140 73.90151515151516,140 73.90151515151516,160 67.49621212121212,160 61.496212121212125,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="67.69886363636364" y="135" class="gene-label">IS431</text>
+  <text x="67.69886363636364" y="175" class="bp-label" text-anchor="middle">
+    35,896
+  </text>
+  
+  <!-- Gene: IS431_1 at 35923-36607 -->
+  
+  <polygon points="68.00757575757575,140 74.96212121212122,140 74.96212121212122,160 68.00757575757575,160 62.00757575757576,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="68.48484848484848" y="135" class="gene-label">IS431_1</text>
+  <text x="68.48484848484848" y="175" class="bp-label" text-anchor="middle">
+    35,923
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41136 -->
+  
+  <polygon points="128.67045454545453,140 160.73863636363635,140 160.73863636363635,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.70454545454544" y="135" class="gene-label">mecA</text>
+  <text x="141.70454545454544" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41136 -->
+  
+  <polygon points="128.67045454545453,140 160.73863636363635,140 160.73863636363635,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.70454545454544" y="135" class="gene-label">mecA</text>
+  <text x="141.70454545454544" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41136 -->
+  
+  <polygon points="128.67045454545453,140 160.73863636363635,140 160.73863636363635,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.70454545454544" y="135" class="gene-label">mecA</text>
+  <text x="141.70454545454544" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41133 -->
+  
+  <polygon points="128.67045454545453,140 160.6818181818182,140 160.6818181818182,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.67613636363635" y="135" class="gene-label">mecA</text>
+  <text x="141.67613636363635" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecA at 39126-41136 -->
+  
+  <polygon points="128.67045454545453,140 160.73863636363635,140 160.73863636363635,160 128.67045454545453,160 122.67045454545453,150"
+           fill="#DC143C" opacity="1.0"/>
+  
+  <text x="141.70454545454544" y="135" class="gene-label">mecA</text>
+  <text x="141.70454545454544" y="175" class="bp-label" text-anchor="middle">
+    39,126
+  </text>
+  
+  <!-- Gene: mecR1 at 41232-42219 -->
+  
+  <polygon points="162.5568181818182,140 175.25,140 181.25,150 175.25,160 162.5568181818182,160"
+           fill="#E8A0BF" opacity="1.0"/>
+  
+  <text x="171.9034090909091" y="135" class="gene-label">mecR1</text>
+  <text x="171.9034090909091" y="175" class="bp-label" text-anchor="middle">
+    41,232
+  </text>
+  
+  <!-- Gene: mecR1 at 41232-42219 -->
+  
+  <polygon points="162.5568181818182,140 175.25,140 181.25,150 175.25,160 162.5568181818182,160"
+           fill="#E8A0BF" opacity="1.0"/>
+  
+  <text x="171.9034090909091" y="135" class="gene-label">mecR1</text>
+  <text x="171.9034090909091" y="175" class="bp-label" text-anchor="middle">
+    41,232
+  </text>
+  
+  <!-- Gene: mecR1 at 41232-42200 -->
+  
+  <polygon points="162.5568181818182,140 174.89015151515153,140 180.89015151515153,150 174.89015151515153,160 162.5568181818182,160"
+           fill="#E8A0BF" opacity="1.0"/>
+  
+  <text x="171.72348484848484" y="135" class="gene-label">mecR1</text>
+  <text x="171.72348484848484" y="175" class="bp-label" text-anchor="middle">
+    41,232
+  </text>
+  
+  <!-- Gene: mecR1 at 41250-42219 -->
+  
+  <polygon points="162.89772727272725,140 175.24999999999997,140 181.24999999999997,150 175.24999999999997,160 162.89772727272725,160"
+           fill="#E8A0BF" opacity="1.0"/>
+  
+  <text x="172.07386363636363" y="135" class="gene-label">mecR1</text>
+  <text x="172.07386363636363" y="175" class="bp-label" text-anchor="middle">
+    41,250
+  </text>
+  
+  <!-- Gene: IS1272 at 42441-44100 -->
+  
+  <polygon points="191.45454545454544,140 216.875,140 216.875,160 191.45454545454544,160 185.45454545454544,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="201.16477272727272" y="135" class="gene-label">IS1272</text>
+  <text x="201.16477272727272" y="175" class="bp-label" text-anchor="middle">
+    42,441
+  </text>
+  
+  <!-- Gene: IS1272 at 42462-44070 -->
+  
+  <polygon points="191.85227272727272,140 216.3068181818182,140 216.3068181818182,160 191.85227272727272,160 185.85227272727272,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="201.07954545454544" y="135" class="gene-label">IS1272</text>
+  <text x="201.07954545454544" y="175" class="bp-label" text-anchor="middle">
+    42,462
+  </text>
+  
+  <!-- Gene: IS1272 at 42465-44050 -->
+  
+  <polygon points="191.9090909090909,140 215.9280303030303,140 215.9280303030303,160 191.9090909090909,160 185.9090909090909,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="200.9185606060606" y="135" class="gene-label">IS1272</text>
+  <text x="200.9185606060606" y="175" class="bp-label" text-anchor="middle">
+    42,465
+  </text>
+  
+  <!-- Gene: ccrB2 at 45891-47520 -->
+  
+  <polygon points="256.79545454545456,140 281.64772727272725,140 281.64772727272725,160 256.79545454545456,160 250.79545454545456,150"
+           fill="#7B68EE" opacity="0.812"/>
+  
+  <text x="266.22159090909093" y="135" class="gene-label">ccrB2</text>
+  <text x="266.22159090909093" y="175" class="bp-label" text-anchor="middle">
+    45,891
+  </text>
+  
+  <!-- Gene: ccrA2 at 47541-48891 -->
+  
+  <polygon points="288.0454545454545,140 307.6136363636364,140 307.6136363636364,160 288.0454545454545,160 282.0454545454545,150"
+           fill="#7B68EE" opacity="0.84"/>
+  
+  <text x="294.82954545454544" y="135" class="gene-label">ccrA2</text>
+  <text x="294.82954545454544" y="175" class="bp-label" text-anchor="middle">
+    47,541
+  </text>
+  
+  <!-- Gene: ccrA2 at 47575-48879 -->
+  
+  <polygon points="288.68939393939394,140 307.3863636363637,140 307.3863636363637,160 288.68939393939394,160 282.68939393939394,150"
+           fill="#7B68EE" opacity="0.84"/>
+  
+  <text x="295.0378787878788" y="135" class="gene-label">ccrA2</text>
+  <text x="295.0378787878788" y="175" class="bp-label" text-anchor="middle">
+    47,575
+  </text>
+  
+  <!-- Gene: IS431_1 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431_1</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431_1 at 76212-77001 -->
+  
+  <polygon points="831.0568181818182,140 840.0,140 840.0,160 831.0568181818182,160 825.0568181818182,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431_1</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431_2 at 76212-76984 -->
+  
+  <polygon points="831.0568181818182,140 839.6780303030304,140 839.6780303030304,160 831.0568181818182,160 825.0568181818182,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.3674242424242" y="135" class="gene-label">IS431_2</text>
+  <text x="832.3674242424242" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431_2 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431_2</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="825.0568181818182,140 834.0,140 840.0,150 834.0,160 825.0568181818182,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="831.0568181818182,140 840.0,140 840.0,160 831.0568181818182,160 825.0568181818182,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431 at 76212-77001 -->
+  
+  <polygon points="831.0568181818182,140 840.0,140 840.0,160 831.0568181818182,160 825.0568181818182,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5284090909091" y="135" class="gene-label">IS431</text>
+  <text x="832.5284090909091" y="175" class="bp-label" text-anchor="middle">
+    76,212
+  </text>
+  
+  <!-- Gene: IS431_1 at 76252-76895 -->
+  
+  <polygon points="825.814393939394,140 831.9924242424244,140 837.9924242424244,150 831.9924242424244,160 825.814393939394,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="831.9034090909091" y="135" class="gene-label">IS431_1</text>
+  <text x="831.9034090909091" y="175" class="bp-label" text-anchor="middle">
+    76,252
+  </text>
+  
+  <!-- Gene: IS431_2 at 76252-77001 -->
+  
+  <polygon points="825.814393939394,140 834.0,140 840.0,150 834.0,160 825.814393939394,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.907196969697" y="135" class="gene-label">IS431_2</text>
+  <text x="832.907196969697" y="175" class="bp-label" text-anchor="middle">
+    76,252
+  </text>
+  
+  <!-- Gene: IS431_1 at 76268-76942 -->
+  
+  <polygon points="832.1174242424242,140 838.8825757575758,140 838.8825757575758,160 832.1174242424242,160 826.1174242424242,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5" y="135" class="gene-label">IS431_1</text>
+  <text x="832.5" y="175" class="bp-label" text-anchor="middle">
+    76,268
+  </text>
+  
+  <!-- Gene: IS431_2 at 76268-76942 -->
+  
+  <polygon points="832.1174242424242,140 838.8825757575758,140 838.8825757575758,160 832.1174242424242,160 826.1174242424242,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5" y="135" class="gene-label">IS431_2</text>
+  <text x="832.5" y="175" class="bp-label" text-anchor="middle">
+    76,268
+  </text>
+  
+  <!-- Gene: IS431 at 76268-76922 -->
+  
+  <polygon points="826.1174242424242,140 832.5037878787879,140 838.5037878787879,150 832.5037878787879,160 826.1174242424242,160"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.3106060606061" y="135" class="gene-label">IS431</text>
+  <text x="832.3106060606061" y="175" class="bp-label" text-anchor="middle">
+    76,268
+  </text>
+  
+  <!-- Gene: IS431 at 76268-76942 -->
+  
+  <polygon points="832.1174242424242,140 838.8825757575758,140 838.8825757575758,160 832.1174242424242,160 826.1174242424242,150"
+           fill="#95A5A6" opacity="1.0"/>
+  
+  <text x="832.5" y="135" class="gene-label">IS431</text>
+  <text x="832.5" y="175" class="bp-label" text-anchor="middle">
+    76,268
+  </text>
+  
+  
+
+  
+  <line x1="10" y1="220" x2="890" y2="220"
+        stroke="#E74C3C" stroke-dasharray="8,4" stroke-width="1.5"/>
+  <text x="450.0" y="238" class="split-warning" text-anchor="middle">
+    &#x26A0; Split Assembly: components on separate contigs
+  </text>
+  
+</svg>
+  </div>
+  
+
+  
+  <div class="card">
+    <h2>Gene Details</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Gene</th><th>Identity %</th><th>Coverage %</th>
+          <th>Strand</th><th>Contig</th><th>Position</th><th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><strong>IS1272</strong></td>
+          <td>100.0</td>
+          <td>100.0</td>
+          <td>-</td>
+          <td>NC_007793.1</td>
+          <td>42,462–44,070</td>
+          <td class="conf-high">High (100%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>IS431</strong></td>
+          <td>100.0</td>
+          <td>100.0</td>
+          <td>-</td>
+          <td>NC_007793.1</td>
+          <td>76,212–77,001</td>
+          <td class="conf-high">High (100%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>IS431_1</strong></td>
+          <td>100.0</td>
+          <td>100.0</td>
+          <td>-</td>
+          <td>NC_007793.1</td>
+          <td>76,212–77,001</td>
+          <td class="conf-high">High (100%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>IS431_2</strong></td>
+          <td>100.0</td>
+          <td>100.0</td>
+          <td>+</td>
+          <td>NC_007793.1</td>
+          <td>76,252–77,001</td>
+          <td class="conf-high">High (100%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>ccrA2</strong></td>
+          <td>98.5</td>
+          <td>96.6</td>
+          <td>-</td>
+          <td>NC_007793.1</td>
+          <td>47,575–48,879</td>
+          <td class="conf-high">High (84%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>ccrB2</strong></td>
+          <td>96.9</td>
+          <td>100.0</td>
+          <td>-</td>
+          <td>NC_007793.1</td>
+          <td>45,891–47,520</td>
+          <td class="conf-high">High (81%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>mecA</strong></td>
+          <td>100.0</td>
+          <td>100.0</td>
+          <td>-</td>
+          <td>NC_007793.1</td>
+          <td>39,126–41,136</td>
+          <td class="conf-high">High (100%)</td>
+        </tr>
+        
+        <tr>
+          <td><strong>mecR1</strong></td>
+          <td>100.0</td>
+          <td>100.0</td>
+          <td>+</td>
+          <td>NC_007793.1</td>
+          <td>41,232–42,200</td>
+          <td class="conf-high">High (100%)</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+  
+
+  <div class="footer">
+    Generated by SCCmec Typer | IWG-SCC Classification Types I–XV
+  </div>
+</body>
+</html>

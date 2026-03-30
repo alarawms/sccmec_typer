@@ -1,0 +1,1025 @@
+{
+    "status": "Positive",
+    "sccmec_type": "Type I",
+    "mec_complex": "Class B",
+    "ccr_complex": "Type 1",
+    "genes_detected": [
+        "IS1272",
+        "IS431",
+        "IS431_1",
+        "IS431_2",
+        "ccrA1",
+        "ccrB1",
+        "mecA",
+        "mecR1"
+    ],
+    "mecA_present": true,
+    "warnings": [],
+    "hits_summary": [
+        {
+            "gene": "ccrA1",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 47997,
+            "end": 49347,
+            "strand": "-",
+            "len": 1350,
+            "aln_len": 1350,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "ccrA1",
+            "accession": "AB505628.1",
+            "scc_type": "IX",
+            "identity": 0.9640287769784173,
+            "coverage": 0.8237037037037037,
+            "contig": "NC_002951.2",
+            "start": 48076,
+            "end": 49188,
+            "strand": "-",
+            "len": 1350,
+            "aln_len": 1112,
+            "id_pct": 96.40287769784173,
+            "cov_pct": 82.37037037037037
+        },
+        {
+            "gene": "ccrB1",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 46824,
+            "end": 47976,
+            "strand": "-",
+            "len": 1152,
+            "aln_len": 1152,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS1272",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 42981,
+            "end": 44566,
+            "strand": "-",
+            "len": 1585,
+            "aln_len": 1585,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS1272",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 42957,
+            "end": 44616,
+            "strand": "-",
+            "len": 1659,
+            "aln_len": 1659,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS1272",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 42978,
+            "end": 44586,
+            "strand": "-",
+            "len": 1608,
+            "aln_len": 1608,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "AB121219.1",
+            "scc_type": "V",
+            "identity": 0.9868421052631579,
+            "coverage": 0.8647281921618205,
+            "contig": "NC_002951.2",
+            "start": 36399,
+            "end": 37083,
+            "strand": "-",
+            "len": 791,
+            "aln_len": 684,
+            "id_pct": 98.68421052631578,
+            "cov_pct": 86.47281921618205
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36352,
+            "end": 37027,
+            "strand": "+",
+            "len": 675,
+            "aln_len": 675,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "AB505630.1",
+            "scc_type": "X",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37083,
+            "strand": "-",
+            "len": 790,
+            "aln_len": 790,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "KR187111.1",
+            "scc_type": "XII",
+            "identity": 0.9886075949367089,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37083,
+            "strand": "+",
+            "len": 790,
+            "aln_len": 790,
+            "id_pct": 98.8607594936709,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "AB121219.1",
+            "scc_type": "V",
+            "identity": 0.9974126778783958,
+            "coverage": 0.9797211660329531,
+            "contig": "NC_002951.2",
+            "start": 36310,
+            "end": 37083,
+            "strand": "+",
+            "len": 789,
+            "aln_len": 773,
+            "id_pct": 99.74126778783958,
+            "cov_pct": 97.9721166032953
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 0.9940740740740741,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36352,
+            "end": 37027,
+            "strand": "+",
+            "len": 675,
+            "aln_len": 675,
+            "id_pct": 99.4074074074074,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "AB505630.1",
+            "scc_type": "X",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37083,
+            "strand": "-",
+            "len": 790,
+            "aln_len": 790,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "KR187111.1",
+            "scc_type": "XII",
+            "identity": 0.9936708860759493,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37083,
+            "strand": "-",
+            "len": 790,
+            "aln_len": 790,
+            "id_pct": 99.36708860759494,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36292,
+            "end": 37084,
+            "strand": "-",
+            "len": 792,
+            "aln_len": 792,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "D86934.2",
+            "scc_type": "II",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36292,
+            "end": 37084,
+            "strand": "-",
+            "len": 792,
+            "aln_len": 792,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "AB037671.1",
+            "scc_type": "III",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37084,
+            "strand": "-",
+            "len": 791,
+            "aln_len": 791,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36292,
+            "end": 37084,
+            "strand": "-",
+            "len": 792,
+            "aln_len": 792,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 1.0,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37084,
+            "strand": "-",
+            "len": 792,
+            "aln_len": 791,
+            "id_pct": 100.0,
+            "cov_pct": 99.87373737373737
+        },
+        {
+            "gene": "IS431",
+            "accession": "FJ390057.1",
+            "scc_type": "VIII",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36292,
+            "end": 37084,
+            "strand": "+",
+            "len": 792,
+            "aln_len": 792,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "MG674089.1",
+            "scc_type": "XIII",
+            "identity": 1.0,
+            "coverage": 0.9703703703703703,
+            "contig": "NC_002951.2",
+            "start": 36372,
+            "end": 37027,
+            "strand": "-",
+            "len": 675,
+            "aln_len": 655,
+            "id_pct": 100.0,
+            "cov_pct": 97.03703703703704
+        },
+        {
+            "gene": "IS431",
+            "accession": "LC440647.1",
+            "scc_type": "XIV",
+            "identity": 0.997037037037037,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36352,
+            "end": 37027,
+            "strand": "+",
+            "len": 675,
+            "aln_len": 675,
+            "id_pct": 99.70370370370371,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "IS431",
+            "accession": "NZ_CP080249.1",
+            "scc_type": "XV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 36293,
+            "end": 37083,
+            "strand": "+",
+            "len": 790,
+            "aln_len": 790,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "D86934.2",
+            "scc_type": "II",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.90034877927255,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB037671.1",
+            "scc_type": "III",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.95017438963627,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.95017438963627,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB121219.1",
+            "scc_type": "V",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.90034877927255,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "FJ390057.1",
+            "scc_type": "VIII",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.95017438963627,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB505628.1",
+            "scc_type": "IX",
+            "identity": 0.9995024875621891,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41652,
+            "strand": "-",
+            "len": 2010,
+            "aln_len": 2010,
+            "id_pct": 99.95024875621891,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB505630.1",
+            "scc_type": "X",
+            "identity": 0.9995024875621891,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41652,
+            "strand": "-",
+            "len": 2010,
+            "aln_len": 2010,
+            "id_pct": 99.95024875621891,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "KR187111.1",
+            "scc_type": "XII",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.95017438963627,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "MG674089.1",
+            "scc_type": "XIII",
+            "identity": 0.9995024875621891,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41652,
+            "strand": "-",
+            "len": 2010,
+            "aln_len": 2010,
+            "id_pct": 99.95024875621891,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "LC440647.1",
+            "scc_type": "XIV",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41649,
+            "strand": "-",
+            "len": 2007,
+            "aln_len": 2007,
+            "id_pct": 99.90034877927255,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecA",
+            "accession": "NZ_CP080249.1",
+            "scc_type": "XV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 39642,
+            "end": 41652,
+            "strand": "-",
+            "len": 2010,
+            "aln_len": 2010,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 41748,
+            "end": 42735,
+            "strand": "+",
+            "len": 987,
+            "aln_len": 987,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 41748,
+            "end": 42735,
+            "strand": "+",
+            "len": 987,
+            "aln_len": 987,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_002951.2",
+            "start": 41766,
+            "end": 42735,
+            "strand": "+",
+            "len": 969,
+            "aln_len": 969,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 1.0,
+            "coverage": 0.968968968968969,
+            "contig": "NC_002951.2",
+            "start": 41748,
+            "end": 42716,
+            "strand": "+",
+            "len": 999,
+            "aln_len": 968,
+            "id_pct": 100.0,
+            "cov_pct": 96.8968968968969
+        }
+    ],
+    "designation": "1B",
+    "ccr_genes": [
+        "ccrA1",
+        "ccrB1"
+    ],
+    "mecC_present": false,
+    "mecB_present": false,
+    "confidence": {
+        "mode": "full",
+        "type_level": {
+            "score": 1.0,
+            "tier": "High"
+        },
+        "mec_component": {
+            "class": "Class B",
+            "score": 1.0,
+            "tier": "High",
+            "genes_expected": [
+                "mecA",
+                "IS1272"
+            ],
+            "genes_detected": [
+                "mecA",
+                "IS1272"
+            ],
+            "genes_missing": [],
+            "orientation": null,
+            "orientation_resolved": null
+        },
+        "ccr_component": {
+            "type": "Type 1",
+            "score": 1.0,
+            "tier": "High",
+            "genes_expected": [
+                "ccrA1",
+                "ccrB1"
+            ],
+            "genes_detected": [
+                "ccrA1",
+                "ccrB1"
+            ],
+            "genes_missing": []
+        },
+        "per_gene": {
+            "ccrA1": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "ccrB1": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "IS1272": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "IS431_1": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "IS431_2": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "IS431": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "mecA": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "mecR1": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            }
+        }
+    },
+    "assembly": {
+        "contigs": [
+            "NC_002951.2"
+        ],
+        "is_split": false,
+        "split_penalty_applied": false,
+        "gene_locations": [
+            {
+                "gene": "ccrA1",
+                "contig": "NC_002951.2",
+                "start": 47997,
+                "end": 49347,
+                "strand": "-"
+            },
+            {
+                "gene": "ccrA1",
+                "contig": "NC_002951.2",
+                "start": 48076,
+                "end": 49188,
+                "strand": "-"
+            },
+            {
+                "gene": "ccrB1",
+                "contig": "NC_002951.2",
+                "start": 46824,
+                "end": 47976,
+                "strand": "-"
+            },
+            {
+                "gene": "IS1272",
+                "contig": "NC_002951.2",
+                "start": 42981,
+                "end": 44566,
+                "strand": "-"
+            },
+            {
+                "gene": "IS1272",
+                "contig": "NC_002951.2",
+                "start": 42957,
+                "end": 44616,
+                "strand": "-"
+            },
+            {
+                "gene": "IS1272",
+                "contig": "NC_002951.2",
+                "start": 42978,
+                "end": 44586,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431_1",
+                "contig": "NC_002951.2",
+                "start": 36399,
+                "end": 37083,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431_1",
+                "contig": "NC_002951.2",
+                "start": 36352,
+                "end": 37027,
+                "strand": "+"
+            },
+            {
+                "gene": "IS431_1",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37083,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431_1",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37083,
+                "strand": "+"
+            },
+            {
+                "gene": "IS431_2",
+                "contig": "NC_002951.2",
+                "start": 36310,
+                "end": 37083,
+                "strand": "+"
+            },
+            {
+                "gene": "IS431_2",
+                "contig": "NC_002951.2",
+                "start": 36352,
+                "end": 37027,
+                "strand": "+"
+            },
+            {
+                "gene": "IS431_2",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37083,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431_2",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37083,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36292,
+                "end": 37084,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36292,
+                "end": 37084,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37084,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36292,
+                "end": 37084,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37084,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36292,
+                "end": 37084,
+                "strand": "+"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36372,
+                "end": 37027,
+                "strand": "-"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36352,
+                "end": 37027,
+                "strand": "+"
+            },
+            {
+                "gene": "IS431",
+                "contig": "NC_002951.2",
+                "start": 36293,
+                "end": 37083,
+                "strand": "+"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41652,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41652,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41652,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41649,
+                "strand": "-"
+            },
+            {
+                "gene": "mecA",
+                "contig": "NC_002951.2",
+                "start": 39642,
+                "end": 41652,
+                "strand": "-"
+            },
+            {
+                "gene": "mecR1",
+                "contig": "NC_002951.2",
+                "start": 41748,
+                "end": 42735,
+                "strand": "+"
+            },
+            {
+                "gene": "mecR1",
+                "contig": "NC_002951.2",
+                "start": 41748,
+                "end": 42735,
+                "strand": "+"
+            },
+            {
+                "gene": "mecR1",
+                "contig": "NC_002951.2",
+                "start": 41766,
+                "end": 42735,
+                "strand": "+"
+            },
+            {
+                "gene": "mecR1",
+                "contig": "NC_002951.2",
+                "start": 41748,
+                "end": 42716,
+                "strand": "+"
+            }
+        ]
+    }
+}

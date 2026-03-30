@@ -1,0 +1,67 @@
+{
+    "status": "Positive",
+    "sccmec_type": "Composite (Type XI)",
+    "mec_complex": "Class C2",
+    "ccr_complex": "Type 1 / Type 3",
+    "genes_detected": [
+        "blaZ",
+        "mecI",
+        "ccrB3",
+        "ccrA1",
+        "mecC",
+        "mecR1"
+    ],
+    "warnings": [
+        "Multiple ccr types detected"
+    ],
+    "hits_summary": [
+        {
+            "gene": "blaZ",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1"
+        },
+        {
+            "gene": "ccrA1",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1"
+        },
+        {
+            "gene": "ccrB3",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1"
+        },
+        {
+            "gene": "mecI",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1"
+        },
+        {
+            "gene": "mecC",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1"
+        }
+    ]
+}

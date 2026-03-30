@@ -1,0 +1,2 @@
+gene,contig,start,end,strand,id_pct,cov_pct,len,aln_len
+mecB,NC_011996.1,25507,27532,+,100.00,100.00,2025,2025

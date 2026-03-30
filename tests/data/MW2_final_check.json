@@ -1,0 +1,347 @@
+{
+    "status": "Positive",
+    "sccmec_type": "Type IV",
+    "mec_complex": "Class B",
+    "ccr_complex": "Type 2",
+    "genes_detected": [
+        "ccrA2",
+        "mecA",
+        "IS431",
+        "mecR1",
+        "IS431_2",
+        "IS1272",
+        "ccrB2",
+        "IS431_1"
+    ],
+    "warnings": [],
+    "hits_summary": [
+        {
+            "gene": "ccrA2",
+            "accession": "D86934.2",
+            "scc_type": "II",
+            "identity": 0.9691558441558441,
+            "coverage": 0.9125925925925926,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "ccrA2",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 0.9836065573770492,
+            "coverage": 0.9037037037037037,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "ccrB2",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 0.9613259668508287,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS1272",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS1272",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS1272",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "AB121219.1",
+            "scc_type": "V",
+            "identity": 0.9853801169590644,
+            "coverage": 0.8647281921618205,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 0.9985185185185185,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "AB505630.1",
+            "scc_type": "X",
+            "identity": 0.9987341772151899,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "KR187111.1",
+            "scc_type": "XII",
+            "identity": 0.9873417721518988,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "AB121219.1",
+            "scc_type": "V",
+            "identity": 0.9961190168175937,
+            "coverage": 0.9797211660329531,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 0.9925925925925926,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "AB505630.1",
+            "scc_type": "X",
+            "identity": 0.9987341772151899,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "KR187111.1",
+            "scc_type": "XII",
+            "identity": 0.9924050632911392,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 0.9987373737373737,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "D86934.2",
+            "scc_type": "II",
+            "identity": 0.9987373737373737,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "AB037671.1",
+            "scc_type": "III",
+            "identity": 0.9987357774968394,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 0.9987373737373737,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 0.9987357774968394,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "FJ390057.1",
+            "scc_type": "VIII",
+            "identity": 0.9987373737373737,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "MG674089.1",
+            "scc_type": "XIII",
+            "identity": 0.9984732824427481,
+            "coverage": 0.9703703703703703,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "LC440647.1",
+            "scc_type": "XIV",
+            "identity": 0.9955555555555555,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "NZ_CP080249.1",
+            "scc_type": "XV",
+            "identity": 0.9987341772151899,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "D86934.2",
+            "scc_type": "II",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB037671.1",
+            "scc_type": "III",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB121219.1",
+            "scc_type": "V",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "FJ390057.1",
+            "scc_type": "VIII",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB505628.1",
+            "scc_type": "IX",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "AB505630.1",
+            "scc_type": "X",
+            "identity": 0.9990049751243781,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "KR187111.1",
+            "scc_type": "XII",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "MG674089.1",
+            "scc_type": "XIII",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "LC440647.1",
+            "scc_type": "XIV",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "NZ_CP080249.1",
+            "scc_type": "XV",
+            "identity": 0.9995024875621891,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AB033763.2",
+            "scc_type": "I",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AB063172.2",
+            "scc_type": "IV",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AF411935.3",
+            "scc_type": "VI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_003923.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "AB373032.1",
+            "scc_type": "VII",
+            "identity": 1.0,
+            "coverage": 0.968968968968969,
+            "contig": "NC_003923.1"
+        }
+    ]
+}

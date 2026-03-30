@@ -1,0 +1,86 @@
+{
+    "status": "Positive",
+    "sccmec_type": "n/a (Plasmid)",
+    "mec_complex": "Plasmid-borne (mecB)",
+    "ccr_complex": "Negative",
+    "genes_detected": [
+        "mecB"
+    ],
+    "mecA_present": false,
+    "warnings": [],
+    "hits_summary": [
+        {
+            "gene": "mecB",
+            "accession": "NC_011996.1",
+            "scc_type": "Plasmid",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_011996.1",
+            "start": 25507,
+            "end": 27532,
+            "strand": "+",
+            "len": 2025,
+            "aln_len": 2025,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        }
+    ],
+    "designation": "n/a",
+    "ccr_genes": [],
+    "mecC_present": false,
+    "mecB_present": true,
+    "confidence": {
+        "mode": "full",
+        "type_level": {
+            "score": 1.0,
+            "tier": "High"
+        },
+        "mec_component": {
+            "class": "Plasmid-borne (mecB)",
+            "score": 1.0,
+            "tier": "High",
+            "genes_expected": [
+                "mecB"
+            ],
+            "genes_detected": [
+                "mecB"
+            ],
+            "genes_missing": [],
+            "orientation": null,
+            "orientation_resolved": null
+        },
+        "ccr_component": {
+            "type": "n/a",
+            "score": 1.0,
+            "tier": "High",
+            "genes_expected": [],
+            "genes_detected": [],
+            "genes_missing": [],
+            "note": "No ccr expected for this type"
+        },
+        "per_gene": {
+            "mecB": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            }
+        }
+    },
+    "assembly": {
+        "contigs": [
+            "NC_011996.1"
+        ],
+        "is_split": false,
+        "split_penalty_applied": false,
+        "gene_locations": [
+            {
+                "gene": "mecB",
+                "contig": "NC_011996.1",
+                "start": 25507,
+                "end": 27532,
+                "strand": "+"
+            }
+        ]
+    }
+}

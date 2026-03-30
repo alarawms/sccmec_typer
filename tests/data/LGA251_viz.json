@@ -1,0 +1,239 @@
+{
+    "status": "Positive",
+    "sccmec_type": "Type XI",
+    "mec_complex": "Class E",
+    "ccr_complex": "Type 8",
+    "genes_detected": [
+        "blaZ",
+        "ccrA1",
+        "ccrB3",
+        "mecC",
+        "mecI",
+        "mecR1"
+    ],
+    "mecA_present": false,
+    "warnings": [],
+    "hits_summary": [
+        {
+            "gene": "blaZ",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1",
+            "start": 34735,
+            "end": 35587,
+            "strand": "-",
+            "len": 852,
+            "aln_len": 852,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "ccrA1",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1",
+            "start": 45877,
+            "end": 47227,
+            "strand": "-",
+            "len": 1350,
+            "aln_len": 1350,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "ccrB3",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1",
+            "start": 44228,
+            "end": 45857,
+            "strand": "-",
+            "len": 1629,
+            "aln_len": 1629,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecI",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1",
+            "start": 39529,
+            "end": 39904,
+            "strand": "+",
+            "len": 375,
+            "aln_len": 375,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecR1",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1",
+            "start": 37778,
+            "end": 39533,
+            "strand": "+",
+            "len": 1755,
+            "aln_len": 1755,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        },
+        {
+            "gene": "mecC",
+            "accession": "FR821779.1",
+            "scc_type": "XI",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "FR821779.1",
+            "start": 35680,
+            "end": 37678,
+            "strand": "+",
+            "len": 1998,
+            "aln_len": 1998,
+            "id_pct": 100.0,
+            "cov_pct": 100.0
+        }
+    ],
+    "designation": "8E",
+    "ccr_genes": [
+        "ccrA1",
+        "ccrB3"
+    ],
+    "mecC_present": true,
+    "mecB_present": false,
+    "confidence": {
+        "mode": "full",
+        "type_level": {
+            "score": 1.0,
+            "tier": "High"
+        },
+        "mec_component": {
+            "class": "Class E",
+            "score": 1.0,
+            "tier": "High",
+            "genes_expected": [
+                "mecC"
+            ],
+            "genes_detected": [
+                "mecC"
+            ],
+            "genes_missing": [],
+            "orientation": null,
+            "orientation_resolved": null
+        },
+        "ccr_component": {
+            "type": "Type 8",
+            "score": 1.0,
+            "tier": "High",
+            "genes_expected": [
+                "ccrA1",
+                "ccrB3"
+            ],
+            "genes_detected": [
+                "ccrA1",
+                "ccrB3"
+            ],
+            "genes_missing": []
+        },
+        "per_gene": {
+            "blaZ": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "ccrA1": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "ccrB3": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "mecI": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "mecR1": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            },
+            "mecC": {
+                "identity_pct": 100.0,
+                "coverage_pct": 100.0,
+                "score": 1.0,
+                "tier": "High"
+            }
+        }
+    },
+    "assembly": {
+        "contigs": [
+            "FR821779.1"
+        ],
+        "is_split": false,
+        "split_penalty_applied": false,
+        "gene_locations": [
+            {
+                "gene": "blaZ",
+                "contig": "FR821779.1",
+                "start": 34735,
+                "end": 35587,
+                "strand": "-"
+            },
+            {
+                "gene": "ccrA1",
+                "contig": "FR821779.1",
+                "start": 45877,
+                "end": 47227,
+                "strand": "-"
+            },
+            {
+                "gene": "ccrB3",
+                "contig": "FR821779.1",
+                "start": 44228,
+                "end": 45857,
+                "strand": "-"
+            },
+            {
+                "gene": "mecI",
+                "contig": "FR821779.1",
+                "start": 39529,
+                "end": 39904,
+                "strand": "+"
+            },
+            {
+                "gene": "mecR1",
+                "contig": "FR821779.1",
+                "start": 37778,
+                "end": 39533,
+                "strand": "+"
+            },
+            {
+                "gene": "mecC",
+                "contig": "FR821779.1",
+                "start": 35680,
+                "end": 37678,
+                "strand": "+"
+            }
+        ]
+    }
+}

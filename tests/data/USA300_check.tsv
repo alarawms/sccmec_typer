@@ -1,0 +1,2 @@
+Sample	Status	SCCmec_Type	Mec_Complex	Ccr_Complex	Genes_Detected	Warnings
+USA300.fna	Positive	Type IV	Class B	Type 2	ccrB2,IS431_1,IS431,ccrA2,mecR1,IS431_2,IS1272,mecA	Split Assembly: Components found on 2 different contigs: NC_007792.1, NC_007793.1

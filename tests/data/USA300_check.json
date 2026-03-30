@@ -1,0 +1,797 @@
+{
+    "status": "Positive",
+    "sccmec_type": "Type IV",
+    "mec_complex": "Class B",
+    "ccr_complex": "Type 2",
+    "genes_detected": [
+        "ccrB2",
+        "IS431_1",
+        "IS431",
+        "ccrA2",
+        "mecR1",
+        "IS431_2",
+        "IS1272",
+        "mecA"
+    ],
+    "warnings": [
+        "Split Assembly: Components found on 2 different contigs: NC_007792.1, NC_007793.1"
+    ],
+    "hits_summary": [
+        {
+            "gene": "ccrA2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9711111111111111,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "ccrA2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9846625766871165,
+            "coverage": 0.965925925925926,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "ccrB2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9686924493554327,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS1272",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS1272",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS1272",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9868421052631579,
+            "coverage": 0.8647281921618205,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9824561403508771,
+            "coverage": 0.8647281921618205,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9824561403508771,
+            "coverage": 0.8647281921618205,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9768518518518519,
+            "coverage": 0.8192161820480405,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9782608695652174,
+            "coverage": 0.8141592920353983,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9925925925925926,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9925925925925926,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9866666666666667,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9886075949367089,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9849521203830369,
+            "coverage": 0.9253164556962026,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.981888745148771,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.981888745148771,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9741267787839586,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9759493670886076,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9974126778783958,
+            "coverage": 0.9797211660329531,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.991128010139417,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.991128010139417,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9844760672703752,
+            "coverage": 0.9797211660329531,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9784537389100126,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9940740740740741,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9925925925925926,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9925925925925926,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9866666666666667,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9762962962962963,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9936708860759493,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9922380336351876,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9922380336351876,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431_2",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9893333333333333,
+            "coverage": 0.9493670886075949,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935400516795866,
+            "coverage": 0.9772727272727273,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.976010101010101,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 0.9974747474747475,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935400516795866,
+            "coverage": 0.9772727272727273,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.976010101010101,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 0.9974747474747475,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935400516795866,
+            "coverage": 0.9785082174462706,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.97724399494311,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 0.9987357774968394,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935400516795866,
+            "coverage": 0.9772727272727273,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.976010101010101,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 0.9974747474747475,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935400516795866,
+            "coverage": 0.9772727272727273,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.976010101010101,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 0.9974747474747475,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.9987373737373737,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935400516795866,
+            "coverage": 0.9772727272727273,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.976010101010101,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 0.9974747474747475,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.9703703703703703,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9923664122137404,
+            "coverage": 0.9703703703703703,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9923664122137404,
+            "coverage": 0.9703703703703703,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9862595419847329,
+            "coverage": 0.9703703703703703,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.997037037037037,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9896296296296296,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9896296296296296,
+            "coverage": 1.0,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9837037037037037,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9935316946959897,
+            "coverage": 0.9784810126582278,
+            "contig": "NC_007792.1"
+        },
+        {
+            "gene": "IS431",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9873417721518988,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9990049751243781,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9990034877927254,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995017438963627,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecA",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 0.9995024875621891,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_007793.1"
+        },
+        {
+            "gene": "mecR1",
+            "accession": "",
+            "scc_type": "Unknown",
+            "identity": 1.0,
+            "coverage": 0.968968968968969,
+            "contig": "NC_007793.1"
+        }
+    ]
+}

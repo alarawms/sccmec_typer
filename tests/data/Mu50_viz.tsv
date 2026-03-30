@@ -1,0 +1,2 @@
+Sample	Status	mecA_Present	SCCmec_Type	Mec_Complex	Ccr_Complex	Genes_Detected	Warnings
+Mu50.fna	Positive	Yes	Type II	Class A	Type 2	IS431,IS431_1,IS431_2,ccrA2,ccrB2,mecA,mecI,mecR1	Split Assembly: Components found on 2 different contigs: NC_002758.2, NC_002774.1

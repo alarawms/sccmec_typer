@@ -1,0 +1,20 @@
+{
+    "status": "Positive",
+    "sccmec_type": "n/a (Plasmid)",
+    "mec_complex": "Plasmid-borne (mecB)",
+    "ccr_complex": "Negative",
+    "genes_detected": [
+        "mecB"
+    ],
+    "warnings": [],
+    "hits_summary": [
+        {
+            "gene": "mecB",
+            "accession": "NC_011996.1",
+            "scc_type": "Plasmid",
+            "identity": 1.0,
+            "coverage": 1.0,
+            "contig": "NC_011996.1"
+        }
+    ]
+}

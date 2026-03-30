@@ -1,0 +1,2 @@
+Sample	Status	SCCmec_Type	Mec_Complex	Ccr_Complex	Genes_Detected	Warnings
+LGA251.fna.gz	Positive	Composite (Type III)	Class A	Type 1 / Type 3	ccrA3,ccrC1,mecA,IS431_2,mecI,ccrB3,mecR1,IS431,IS431_1	Multiple ccr types detected
