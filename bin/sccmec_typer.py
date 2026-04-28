@@ -10,6 +10,59 @@ from lib.aligner import run_minimap2
 from lib.parser import parse_paf
 from lib.classifier import classify_sccmec
 
+_DEFAULT_BEST_FIT_THRESHOLD = 0.75
+
+
+def apply_best_fit(result, threshold=_DEFAULT_BEST_FIT_THRESHOLD):
+    """Promote the estimator's top candidate when classification returns Unknown.
+
+    When ``--best-fit`` is set and the standard classifier cannot confirm an
+    SCCmec type (sccmec_type == "Unknown"), this function uses the estimator's
+    best_guess as the final classification, labelled as "Type X (est.)".
+
+    Samples below *threshold* remain "Unknown" — do not lower the threshold
+    without understanding the biological evidence, as short-read assemblies of
+    CC97/SCCmec V frequently produce split contigs that fool the orientation
+    check even when the type is unambiguous from gene content alone.
+
+    Args:
+        result: enriched classifier result dict (must include "estimation" key).
+        threshold: minimum best_guess_score required to promote (default 0.75).
+
+    Returns:
+        Tuple (result, promoted) where *promoted* is True if a promotion
+        occurred.  The result dict is modified in-place.
+    """
+    if result.get("sccmec_type") != "Unknown":
+        return result, False
+
+    estimation = result.get("estimation")
+    if not estimation:
+        return result, False
+
+    score = estimation.get("best_guess_score", 0.0)
+    best_guess = estimation.get("best_guess", "")
+
+    if not best_guess or score < threshold:
+        return result, False
+
+    original_type = result["sccmec_type"]
+    result["sccmec_type"] = f"{best_guess} (est.)"
+    result.setdefault("warnings", []).append(
+        f"Best-fit estimation promoted from Unknown: "
+        f"{best_guess} (score={score:.2f}, threshold={threshold:.2f})"
+    )
+    result["best_fit_applied"] = {
+        "original": original_type,
+        "promoted_to": result["sccmec_type"],
+        "score": round(score, 3),
+        "threshold": threshold,
+        "ruling": estimation.get("best_guess_ruling", ""),
+    }
+
+    return result, True
+
+
 def main():
     parser = argparse.ArgumentParser(description="SCCmec Typer: A minimap2-based tool for typing SCCmec elements.")
     parser.add_argument("--1", dest="input1", required=True, help="Input genome assembly (FASTA) or forward reads (FASTQ)")
@@ -18,6 +71,30 @@ def main():
     parser.add_argument("-o", "--output", default="sccmec_results", help="Output prefix")
     parser.add_argument("--threads", type=int, default=4, help="Number of threads")
     parser.add_argument("--no-viz", action="store_true", help="Skip SVG/HTML visualization generation")
+    parser.add_argument(
+        "--best-fit",
+        dest="best_fit",
+        action="store_true",
+        default=False,
+        help=(
+            "When classification returns Unknown (e.g. due to a split assembly "
+            "breaking IS431 orientation detection), promote the estimator's top "
+            "candidate as the final SCCmec type, labelled 'Type X (est.)'. "
+            "Combine with --min-estimate-score to control the confidence floor."
+        ),
+    )
+    parser.add_argument(
+        "--min-estimate-score",
+        dest="min_estimate_score",
+        type=float,
+        default=_DEFAULT_BEST_FIT_THRESHOLD,
+        metavar="SCORE",
+        help=(
+            "Minimum estimator score (0–1) required to promote a best-fit type "
+            "when --best-fit is active. Candidates below this threshold remain "
+            "Unknown. Default: %(default)s."
+        ),
+    )
 
     args = parser.parse_args()
     
@@ -63,6 +140,17 @@ def main():
     from lib.confidence import enrich_result_with_confidence
     result = enrich_result_with_confidence(result, soft_hits=soft_hits)
 
+    # 4. Best-fit promotion (optional)
+    best_fit_applied = False
+    if args.best_fit:
+        result, best_fit_applied = apply_best_fit(result, threshold=args.min_estimate_score)
+        if best_fit_applied:
+            bfi = result["best_fit_applied"]
+            print(
+                f"Best-fit applied: Unknown → {bfi['promoted_to']} "
+                f"(score={bfi['score']:.2f})"
+            )
+
     # Output results
     import json
     import csv
@@ -100,7 +188,7 @@ def main():
     with open(tsv_output_file, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         # Header
-        writer.writerow(['Sample', 'Status', 'mecA_Present', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score'])
+        writer.writerow(['Sample', 'Status', 'mecA_Present', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score', 'Best_Fit_Applied'])
         # Data
         sample_name = os.path.basename(args.input1)
         genes_str = ",".join(result.get('genes_detected', []))
@@ -120,7 +208,8 @@ def main():
             genes_str,
             warnings_str,
             est_type,
-            est_score
+            est_score,
+            "Yes" if best_fit_applied else "No",
         ])
     print(f"TSV summary written to {tsv_output_file}")
 
