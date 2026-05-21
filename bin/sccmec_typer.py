@@ -100,9 +100,10 @@ def main():
     
     print(f"Starting SCCmec Typer on {args.input1}...")
     
-    # Determine input type and preset
-    # Default to asm5 for assembly
-    preset = "asm5"
+    # Determine input type and preset.
+    # asm20 (≤20% divergence) improves sensitivity on fragmented assemblies
+    # and for mecC/mecB which are genuinely more divergent than mecA.
+    preset = "asm20"
     is_reads = False
     
     if args.input2:
@@ -188,7 +189,7 @@ def main():
     with open(tsv_output_file, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         # Header
-        writer.writerow(['Sample', 'Status', 'mecA_Present', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score', 'Best_Fit_Applied'])
+        writer.writerow(['Sample', 'Status', 'mecA_Present', 'Mec_Gene', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score', 'Best_Fit_Applied'])
         # Data
         sample_name = os.path.basename(args.input1)
         genes_str = ",".join(result.get('genes_detected', []))
@@ -198,10 +199,27 @@ def main():
         if result.get("estimation"):
             est_type = result["estimation"].get("best_guess", "")
             est_score = f"{result['estimation'].get('best_guess_score', 0):.2f}"
+
+        # Derive mec gene from element-level hits so mecA/mecC/mecB are reported
+        # even when the full cassette cannot be typed (e.g. fragmented assembly).
+        all_hit_genes = {h['gene'] for h in result.get('hits_summary', [])}
+        all_hit_genes |= {h['gene'] for h in soft_hits}
+        if 'mecA' in all_hit_genes:
+            mec_gene_detected = 'mecA'
+        elif 'mecC' in all_hit_genes:
+            mec_gene_detected = 'mecC'
+        elif 'mecB' in all_hit_genes:
+            mec_gene_detected = 'mecB'
+        else:
+            mec_gene_detected = 'None'
+
+        meca_present = result.get('mecA_present', False) or mec_gene_detected == 'mecA'
+
         writer.writerow([
             sample_name,
             result.get('status', 'Unknown'),
-            "Yes" if result.get('mecA_present', False) else "No",
+            "Yes" if meca_present else "No",
+            mec_gene_detected,
             result.get('sccmec_type', 'Unknown'),
             result.get('mec_complex', 'Unknown'),
             result.get('ccr_complex', 'Unknown'),
