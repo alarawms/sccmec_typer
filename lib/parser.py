@@ -74,6 +74,7 @@ def parse_paf(paf_file):
                         "start": target_start,
                         "end": target_end,
                         "strand": strand,
+                        "contig_len": target_len,
                         "len": query_len,
                         "aln_len": block_len,
                         "id_pct": identity * 100,

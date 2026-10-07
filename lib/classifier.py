@@ -85,6 +85,79 @@ def _classify_mec_complex(genes_found, hits_list, rules):
     return "Negative"
 
 
+# A mec gene this close to a contig end means the cassette was likely split by the
+# assembler (IS431 repeats flank mecA); class D / missing-ccr calls are then unreliable.
+CONTIG_EDGE_BP = 1500
+
+MEC_GENES = ("mecA", "mecC", "mecB")
+
+
+def _locus_count(hits_list, gene):
+    """Number of distinct (non-overlapping) loci at which `gene` was hit.
+
+    Several database alleles often hit the same locus; those collapse to one.
+    Read-mode hits have no coordinates and count as a single locus.
+    """
+    spans = sorted((h.get("contig", ""), h.get("start", 0), h.get("end", 0))
+                   for h in hits_list if h["gene"] == gene)
+    loci, last = 0, None
+    for contig, start, end in spans:
+        if last is None or contig != last[0] or start > last[2]:
+            loci += 1
+            last = (contig, start, end)
+        else:
+            last = (contig, last[1], max(last[2], end))
+    return loci
+
+
+def _ccr_copies(hits_list, ccr_type, rules):
+    """Copies of a ccr complex = fewest loci among its required genes."""
+    rule = next(r for r in rules["ccr_complex_rules"] if r["name"] == ccr_type)
+    return min(_locus_count(hits_list, g) for g in rule["required_genes"])
+
+
+def _mec_at_contig_edge(hits_list):
+    """True if any mec gene hit lies within CONTIG_EDGE_BP of its contig end."""
+    for h in hits_list:
+        if h["gene"] in MEC_GENES and h.get("contig_len"):
+            if h["start"] < CONTIG_EDGE_BP or h["contig_len"] - h["end"] < CONTIG_EDGE_BP:
+                return True
+    return False
+
+
+def _iwg_designations(mec_complex, ccr_types, hits_list, rules):
+    """IWG-SCC style type/designation, including composite elements.
+
+    Notation follows the literature convention for extra ccr complexes, e.g.
+    V(5C2&5) = type V with a second ccrC (ccr5) copy, VII(5C1&1) = type VII plus ccr1.
+    When several defined types fit (e.g. class B with ccr1 and ccr2 -> I or IV),
+    all are listed instead of picking the first rule.
+
+    Returns (iwg_type, iwg_designation, type_candidates).
+    """
+    if mec_complex in ("Negative", "Plasmid-borne (mecB)") or not ccr_types:
+        return "nt", None, []
+    mec_ok = [mec_complex] + (["Class C1", "Class C2"] if mec_complex == "Class C" else [])
+    num = lambda t: t.replace("Type ", "")
+    copies = {t: _ccr_copies(hits_list, t, rules) for t in ccr_types}
+    labels, desigs, cands = [], [], []
+    for rule in rules["sccmec_type_rules"]:
+        if rule["mec"] not in mec_ok or rule["ccr"] not in ccr_types:
+            continue
+        extras = [num(t) for t in sorted(ccr_types) if t != rule["ccr"]]
+        extras += [num(rule["ccr"])] * (copies[rule["ccr"]] - 1)
+        d = rule["designation"] + "".join(f"&{e}" for e in sorted(extras))
+        roman = rule["name"].replace("Type ", "")
+        labels.append(f"{roman}({d})")
+        desigs.append(d)
+        cands.append(rule["name"])
+    if not cands:  # mec + ccr present but no defined type combines them
+        mec_letter = mec_complex.replace("Class ", "")
+        d = "&".join(num(t) for t in sorted(ccr_types)) + mec_letter
+        return f"nt({d})", d, []
+    return " / ".join(labels), " / ".join(desigs), cands
+
+
 def _classify_ccr_complex(genes_found, rules):
     """Determine ccr complex type(s) using pair-based gene matching.
 
@@ -245,17 +318,38 @@ def classify_sccmec(hits_list):
             if sccmec_type != "Unknown":
                 break
 
-    # Composite detection: multiple ccr types
-    if len(ccr_types) > 1 and sccmec_type != "Unknown":
-        sccmec_type = f"Composite ({sccmec_type})"
+    iwg_type, iwg_designation, type_candidates = _iwg_designations(
+        mec_complex, ccr_types, hits_list, rules)
+
+    # Composite detection: multiple ccr types. Name every defined type that fits
+    # rather than the first rule in db order (class B + ccr1 + ccr2 is I or IV).
+    if len(ccr_types) > 1 and type_candidates:
+        sccmec_type = f"Composite ({' / '.join(type_candidates)})"
         warnings.append(f"Multiple ccr types detected: {', '.join(sorted(ccr_types))}")
     elif len(ccr_types) > 1:
         sccmec_type = "Composite"
         warnings.append(f"Multiple ccr types detected: {', '.join(sorted(ccr_types))}")
 
+    # Fragmented assemblies: a mec gene at a contig end means the downstream IS431
+    # (class C/D distinction) and the ccr genes may simply be on other contigs.
+    assembly_limited = (
+        (not ccr_types or mec_complex == "Class D") and _mec_at_contig_edge(hits_list))
+    if assembly_limited:
+        if not ccr_types and status == "Partial (Unclassifiable)":
+            status = "Partial (Assembly-limited)"
+        warnings.append(
+            f"mec gene within {CONTIG_EDGE_BP} bp of a contig end: cassette likely split "
+            f"by the assembly (IS431 repeats); missing ccr / class D may be artefacts. "
+            f"Type from reads or a long-read assembly")
+
     return {
         "status": status,
         "sccmec_type": sccmec_type,
+        "iwg_type": iwg_type,
+        "iwg_designation": iwg_designation,
+        "type_candidates": type_candidates,
+        "ccr_copies": {t: _ccr_copies(hits_list, t, rules) for t in sorted(ccr_types)},
+        "assembly_limited": assembly_limited,
         "mec_complex": mec_complex,
         "ccr_complex": ccr_complex,
         "genes_detected": sorted(genes_found),
