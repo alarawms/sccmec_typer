@@ -15,6 +15,10 @@ GENE_WEIGHTS = {
 DEFAULT_WEIGHT = 0.2
 
 
+# classifier mec classes that do not fix C1 vs C2 (or any class)
+UNRESOLVED_MEC = ("", "Negative", "Unclassifiable (mecA)", "Undetermined (fragmented)")
+
+
 def _load_rules():
     rules_path = os.path.join(os.path.dirname(__file__), "../db/rules.json")
     with open(rules_path, "r") as f:
@@ -208,12 +212,22 @@ def estimate_closest_types(result, hits, soft_hits, max_candidates=3):
         # types whose mec/ccr complex aligns with what the classifier found.
         detected_mec = result.get("mec_complex", "")
         detected_ccr = result.get("ccr_complex", "")
-        mec_match = (detected_mec != "Negative" and detected_mec == type_rule["mec"])
-        ccr_match = (detected_ccr != "Negative" and detected_ccr == type_rule.get("ccr", ""))
+        # C1 and C2 have identical gene sets, so gene evidence alone scores both V (5C2)
+        # and VII (5C1) as full matches. When the classifier has decided a specific mec
+        # class (e.g. from the IS431 copies flanking mecA), a different class conflicts.
+        mec_known = detected_mec not in UNRESOLVED_MEC
+        mec_compatible = (detected_mec == type_rule["mec"]
+                          or (detected_mec == "Class C" and type_rule["mec"] in ("Class C1", "Class C2")))
+        mec_conflict = mec_known and not mec_compatible
+        mec_match = mec_known and detected_mec == type_rule["mec"]
+        detected_ccr_set = {c.strip() for c in detected_ccr.split("/")} - {"Negative", ""}
+        ccr_match = type_rule.get("ccr", "") in detected_ccr_set   # composites list several
         if mec_match:
             score = score * 0.7 + 0.3  # 30% bonus for mec complex match
         if ccr_match:
             score = score * 0.7 + 0.3  # 30% bonus for ccr complex match
+        if mec_conflict:
+            score *= 0.5               # contradicts the classifier's mec class
 
         if score <= 0:
             continue
@@ -226,6 +240,9 @@ def estimate_closest_types(result, hits, soft_hits, max_candidates=3):
         ccr_genes = [g for g in gene_evidence if g["gene"].startswith("ccr")]
 
         mec_status = "matched" if all(g["status"] == "present" for g in mec_genes) else "partial" if any(g["status"] != "absent" for g in mec_genes) else "missing"
+        if mec_conflict:
+            mec_status = "conflict"
+            candidate_status = "partial_match" if candidate_status == "full_match" else candidate_status
         ccr_status = "matched" if all(g["status"] == "present" for g in ccr_genes) else "partial" if any(g["status"] != "absent" for g in ccr_genes) else "missing"
 
         mec_detail = ", ".join(f"{g['gene']} {g['status']}" for g in mec_genes)

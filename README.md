@@ -54,11 +54,43 @@ the first matching rule in `db/rules.json`; all fitting types are listed
 is reported as `III(3A&5) / XIV(5A&3)` — whether the extra ccrC belongs to the
 cassette or an adjacent element (e.g. SCCmercury) needs the cassette structure.
 
+**mec class from the mec locus only.** In assembly mode IS431, IS1272, *mecR1* and *mecI*
+count toward the mec class only when they lie on the same contig within 15 kb of the
+mec gene. IS431/IS1272 copies elsewhere in the genome are ignored (and listed in a
+warning); previously they produced false class B / C2 calls such as `nt(5B)`.
+If a mec gene sits at a contig end and no class-defining neighbour is present, the class
+is `Undetermined (fragmented)` (IWG field e.g. `nt(5?)`) instead of class D.
+
 **Fragmented assemblies.** IS431 copies flanking *mecA* often split short-read
 assemblies, leaving *mecA* on a short contig without the downstream IS431 or the ccr
 genes. Such calls get status `Partial (Assembly-limited)` (or a warning when a class D
 call is made) instead of a confident "no ccr / class D". Type these samples from reads
 (`--1 R1 --2 R2`) or a long-read assembly.
+
+**Read-mode fallback.** `--fallback-1 R1 [--fallback-2 R2]` (or ONT reads in `--fallback-1`)
+re-types from reads when the assembly result is assembly-limited. The read result is used
+when it finds a ccr complex (`Typing_Mode = reads (fallback: assembly-limited)`); the
+assembly call is kept in the JSON (`assembly_result`). Read mode has no coordinates, so
+IS431 orientation (C1 vs C2) and ccr copy number cannot be resolved there
+(e.g. `V(5C2) / VII(5C1)`).
+
+**Estimator agrees with the classifier.** C1 and C2 have the same genes, so gene evidence
+alone scored V (5C2) and VII (5C1) as equal full matches. When the classifier has
+determined the mec class (from the IS431 copies flanking the mec gene), candidates with a
+different class are marked `mec_complex.status = "conflict"`, down-weighted and never
+`full_match`. The ccr bonus now also applies to composites (`Type 1 / Type 5`).
+
+**Putative cassette boundaries (`Cassette_Segments`, `DR_Candidates`, `Cassette_Note`).**
+orfX (rlmH) is located with a bundled reference (`lib/data/orfX_NCTC8325.fasta`); the last
+18 bp of the genome's own orfX are searched downstream (120 kb) as direct repeats.
+Repeats with <= 2 mismatches split the region into segments and every mec/ccr locus is
+assigned to one, e.g. `seg1(0.0-38.6kb):ccrC1,mecA,ccrC1|seg2(38.6-61.5kb):ccrB1,ccrA1`
+— an extra ccr in its own segment is flagged as a likely separate (tandem) SCC element.
+All candidates up to 4 mismatches are listed as `offset:mismatches`. This map is
+informative only and does not change the type call.
+
+**Elements CSV.** `*_elements.csv` has one row per locus: overlapping hits of different
+database alleles are collapsed to the best one (the JSON keeps every hit).
 
 ## Installation
 
