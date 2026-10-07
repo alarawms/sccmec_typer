@@ -8,9 +8,20 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from lib.aligner import run_minimap2
 from lib.parser import parse_paf
-from lib.classifier import classify_sccmec
+from lib.classifier import classify_sccmec, collapse_loci
 
 _DEFAULT_BEST_FIT_THRESHOLD = 0.75
+
+
+def type_reads(r1, r2, db, out_prefix, threads):
+    """Read-mode typing: map reads to the gene database; returns (result, soft_hits)."""
+    from lib.coverage import calculate_gene_coverage
+    from lib.confidence import enrich_result_with_confidence
+    preset = "sr" if r2 else "map-ont"
+    paf = f"{out_prefix}.paf"
+    run_minimap2(r1, db, paf, threads, preset=preset, target_is_db=True, input_file_2=r2)
+    hits, soft_hits = calculate_gene_coverage(paf)
+    return enrich_result_with_confidence(classify_sccmec(hits), soft_hits=soft_hits), soft_hits
 
 
 def apply_best_fit(result, threshold=_DEFAULT_BEST_FIT_THRESHOLD):
@@ -96,6 +107,11 @@ def main():
         ),
     )
 
+    parser.add_argument("--fallback-1", dest="fallback1",
+                        help="Reads (FASTQ; R1, or ONT reads) to re-type from when the assembly "
+                             "result is assembly-limited (cassette split across contigs)")
+    parser.add_argument("--fallback-2", dest="fallback2", help="R2 for --fallback-1 (paired short reads)")
+
     args = parser.parse_args()
     
     print(f"Starting SCCmec Typer on {args.input1}...")
@@ -152,6 +168,34 @@ def main():
                 f"(score={bfi['score']:.2f})"
             )
 
+    # 5. Read-mode fallback for split cassettes (assembly mode only)
+    typing_mode = "reads" if is_reads else "assembly"
+    if not is_reads and result.get("assembly_limited") and args.fallback1:
+        print("Assembly-limited result: re-typing from reads...")
+        fb, fb_soft = type_reads(args.fallback1, args.fallback2, args.db, f"{args.output}.fallback", args.threads)
+        if fb.get("status") != "Negative" and fb.get("ccr_complex", "Negative") != "Negative":
+            fb["assembly_result"] = {k: result.get(k) for k in
+                                     ("status", "sccmec_type", "iwg_type", "mec_complex", "ccr_complex")}
+            fb.setdefault("warnings", []).append(
+                "Typed from reads because the assembly result was assembly-limited; read mode "
+                "cannot use IS431 orientation, so C1/C2 may stay unresolved")
+            result, soft_hits, typing_mode = fb, soft_hits + fb_soft, "reads (fallback: assembly-limited)"
+        else:
+            result.setdefault("warnings", []).append("Read fallback found no ccr either; kept assembly result")
+
+    # 6. Putative cassette boundaries from orfX direct repeats (assembly input only)
+    cassette = None
+    if not is_reads:
+        from lib.cassette import cassette_map, interpret
+        try:
+            cassette = cassette_map(args.input1, collapse_loci(hits), args.threads)
+            if cassette:
+                cassette["interpretation"] = interpret(cassette["segments"])
+        except Exception as e:      # never fail typing because of the optional map
+            print(f"Cassette map skipped: {e}")
+    result["cassette"] = cassette
+    result["typing_mode"] = typing_mode
+
     # Output results
     import json
     import csv
@@ -170,7 +214,8 @@ def main():
         headers = ["gene", "contig", "start", "end", "strand", "id_pct", "cov_pct", "len", "aln_len"]
         writer.writerow(headers)
         
-        for hit in result.get("hits_summary", []):
+        # one row per locus (overlapping database alleles collapsed to the best hit)
+        for hit in collapse_loci(result.get("hits_summary", [])):
             writer.writerow([
                 hit.get("gene", ""),
                 hit.get("contig", ""),
@@ -191,7 +236,8 @@ def main():
         # Header
         # New columns are appended at the end so positional consumers keep working.
         writer.writerow(['Sample', 'Status', 'mecA_Present', 'Mec_Gene', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score', 'Best_Fit_Applied',
-                         'IWG_Type', 'IWG_Designation', 'Type_Candidates', 'Ccr_Copies', 'Assembly_Limited'])
+                         'IWG_Type', 'IWG_Designation', 'Type_Candidates', 'Ccr_Copies', 'Assembly_Limited',
+                         'Typing_Mode', 'Cassette_Segments', 'DR_Candidates', 'Cassette_Note'])
         # Data
         sample_name = os.path.basename(args.input1)
         genes_str = ",".join(result.get('genes_detected', []))
@@ -230,11 +276,15 @@ def main():
             est_type,
             est_score,
             "Yes" if best_fit_applied else "No",
-            result.get('iwg_type', 'nt'),
+            'Negative' if result.get('status') == 'Negative' else result.get('iwg_type', 'nt'),
             result.get('iwg_designation') or '',
             ";".join(result.get('type_candidates', [])),
             ";".join(f"{k.replace('Type ', 'ccr')}x{v}" for k, v in result.get('ccr_copies', {}).items()),
             "Yes" if result.get('assembly_limited') else "No",
+            typing_mode,
+            (cassette or {}).get('summary', ''),
+            ";".join(f"{d['offset']}:{d['mismatches']}" for d in (cassette or {}).get('dr_candidates', [])),
+            (cassette or {}).get('interpretation', ''),
         ])
     print(f"TSV summary written to {tsv_output_file}")
 

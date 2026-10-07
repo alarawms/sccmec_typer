@@ -13,6 +13,36 @@ def load_rules():
         return None
 
 
+IS431_NAMES = ("IS431", "IS431_1", "IS431_2")
+
+
+def _flanking_is431_orientation(hits_list):
+    """C1/C2 from the IS431 copies that flank the mec gene (IS431-mecA-dmecR1-IS431).
+
+    Uses the nearest IS431 locus on each side of mecA on the same contig, so extra IS431
+    copies elsewhere (common in composites) cannot flip the call. Returns "same",
+    "opposite", or None when coordinates are missing or one side has no IS431.
+    """
+    mec = [h for h in hits_list if h["gene"] in MEC_GENES and h.get("contig_len")]
+    if not mec:
+        return None
+    m = max(mec, key=lambda h: h.get("id_pct", 0))
+    iss = [h for h in hits_list if h["gene"] in IS431_NAMES and h.get("contig") == m["contig"]
+           and h.get("strand") in ("+", "-")]
+    left = [h for h in iss if h["end"] <= m["start"] + 100]
+    right = [h for h in iss if h["start"] >= m["end"] - 100]
+    if not left or not right:
+        return None
+    # nearest locus on each side; within a locus several database IS431 entries can align
+    # in different orientations, so take the longest (full-length) alignment there
+    near_l = max(h["end"] for h in left)
+    near_r = min(h["start"] for h in right)
+    span = lambda h: h.get("aln_len") or (h["end"] - h["start"])
+    a = max((h for h in left if h["end"] >= near_l - 300), key=span)
+    b = max((h for h in right if h["start"] <= near_r + 300), key=span)
+    return "same" if a["strand"] == b["strand"] else "opposite"
+
+
 def _determine_is431_orientation(hits_list):
     """Determine IS431 orientation from PAF strand information.
 
@@ -54,7 +84,8 @@ def _classify_mec_complex(genes_found, hits_list, rules):
       - excluded: none of these genes may be present
       - orientation: IS431 orientation must match ("same" or "opposite")
     """
-    is431_orientation = _determine_is431_orientation(hits_list)
+    is431_orientation = (_flanking_is431_orientation(hits_list)
+                         or _determine_is431_orientation(hits_list))
 
     for rule in rules["mec_complex_rules"]:
         # Check required genes
@@ -90,6 +121,47 @@ def _classify_mec_complex(genes_found, hits_list, rules):
 CONTIG_EDGE_BP = 1500
 
 MEC_GENES = ("mecA", "mecC", "mecB")
+
+# mec-complex accessory genes only define the class when they sit in the mec locus.
+# IS431 / IS1272 also occur elsewhere in S. aureus genomes; genome-wide presence gave
+# false class B / C2 calls on fragmented assemblies.
+MEC_ACCESSORY = ("IS431", "IS431_1", "IS431_2", "IS1272", "mecR1", "mecI")
+MEC_LOCUS_BP = 15000   # IS431 can sit ~11 kb downstream of mecA (class C2)
+UNDETERMINED_CLASS = "Undetermined (fragmented)"
+
+
+def _mec_locus_hits(hits_list):
+    """Hits used for the mec complex: mec genes + accessory genes within MEC_LOCUS_BP
+    of a mec gene on the same contig. Read-mode hits (no contig length) are kept as is."""
+    mec = [h for h in hits_list if h["gene"] in MEC_GENES]
+    if not mec or not all(h.get("contig_len") for h in mec):
+        return hits_list
+    def near(h):
+        return any(h.get("contig") == m.get("contig")
+                   and h.get("start", 0) < m.get("end", 0) + MEC_LOCUS_BP
+                   and h.get("end", 0) > m.get("start", 0) - MEC_LOCUS_BP for m in mec)
+    return [h for h in hits_list if h["gene"] not in MEC_ACCESSORY or near(h)]
+
+
+def collapse_loci(hits_list):
+    """One hit per locus: overlapping hits of the same gene on the same contig (different
+    database alleles) collapse to the best one (identity x coverage). Read-mode hits without
+    coordinates are returned unchanged."""
+    if not hits_list or not all("start" in h and "end" in h and h.get("contig_len") for h in hits_list):
+        return list(hits_list)
+    best = []
+    for h in sorted(hits_list, key=lambda h: (h["gene"], h.get("contig", ""), h["start"])):
+        last = best[-1] if best else None
+        if last and last["gene"] == h["gene"] and last.get("contig") == h.get("contig") and h["start"] <= last["end"]:
+            score = lambda x: x.get("id_pct", 0) * x.get("cov_pct", 0)
+            if score(h) > score(last):
+                h = dict(h, start=min(h["start"], last["start"]), end=max(h["end"], last["end"]))
+                best[-1] = h
+            else:
+                best[-1] = dict(last, end=max(last["end"], h["end"]))
+        else:
+            best.append(dict(h))
+    return best
 
 
 def _locus_count(hits_list, gene):
@@ -137,6 +209,10 @@ def _iwg_designations(mec_complex, ccr_types, hits_list, rules):
     """
     if mec_complex in ("Negative", "Plasmid-borne (mecB)") or not ccr_types:
         return "nt", None, []
+    num0 = lambda t: t.replace("Type ", "")
+    if mec_complex == UNDETERMINED_CLASS:      # ccr known, mec class not (split cassette)
+        d = "&".join(num0(t) for t in sorted(ccr_types)) + "?"
+        return f"nt({d})", d, []
     mec_ok = [mec_complex] + (["Class C1", "Class C2"] if mec_complex == "Class C" else [])
     num = lambda t: t.replace("Type ", "")
     copies = {t: _ccr_copies(hits_list, t, rules) for t in ccr_types}
@@ -156,6 +232,27 @@ def _iwg_designations(mec_complex, ccr_types, hits_list, rules):
         d = "&".join(num(t) for t in sorted(ccr_types)) + mec_letter
         return f"nt({d})", d, []
     return " / ".join(labels), " / ".join(desigs), cands
+
+
+def _read_mode_classes(genes_found, rules):
+    """mec classes whose required/any_of genes are present, ignoring exclusions and IS431
+    orientation. Read-mode hits have no coordinates, so an IS1272/IS431 copy anywhere in
+    the genome would otherwise force (or exclude) a class. C1/C2 collapse to 'Class C'."""
+    out = []
+    for rule in rules["mec_complex_rules"]:
+        if not all(g in genes_found for g in rule["required"]):
+            continue
+        if "any_of" in rule and not any(g in genes_found for g in rule["any_of"]):
+            continue
+        name = "Class C" if rule["name"] in ("Class C1", "Class C2") else rule["name"]
+        if name not in out:
+            out.append(name)
+    return out
+
+
+def _has_defined_type(mec_class, ccr_types, rules):
+    mecs = [mec_class] + (["Class C1", "Class C2"] if mec_class == "Class C" else [])
+    return any(r["mec"] in mecs and r["ccr"] in ccr_types for r in rules["sccmec_type_rules"])
 
 
 def _classify_ccr_complex(genes_found, rules):
@@ -248,12 +345,37 @@ def classify_sccmec(hits_list):
     mecC_present = "mecC" in genes_found
     mecB_present = "mecB" in genes_found
 
-    # Step 1: mec complex
-    mec_complex = _classify_mec_complex(genes_found, hits_list, rules)
+    # Step 1: mec complex — only from genes in the mec locus (see MEC_LOCUS_BP)
+    locus_hits = _mec_locus_hits(hits_list)
+    locus_genes = set(h["gene"] for h in locus_hits)
+    mec_complex = _classify_mec_complex(locus_genes, locus_hits, rules)
+    if locus_genes != genes_found & (locus_genes | set(MEC_ACCESSORY)):
+        ignored = sorted((genes_found & set(MEC_ACCESSORY)) - locus_genes)
+        if ignored:
+            warnings.append(f"Ignored for mec class (not within {MEC_LOCUS_BP} bp of mec gene): "
+                            f"{', '.join(ignored)}")
+    # A mec gene at a contig end with no class-defining neighbours: the class is unknown,
+    # not D ("no IS") — the flanking IS431/IS1272 is simply on another contig.
+    mec_split = _mec_at_contig_edge(hits_list)
+    if mec_split and mec_complex in ("Class D", "Unclassifiable (mecA)"):
+        mec_complex = UNDETERMINED_CLASS
 
     # Step 2: ccr complex
     ccr_types = _classify_ccr_complex(genes_found, rules)
     ccr_complex = " / ".join(sorted(ccr_types)) if ccr_types else "Negative"
+
+    # Read mode: if the first-matching mec class forms no defined type with the ccr found,
+    # but another class whose markers are also present does, use that one.
+    read_mode = not any(h.get("contig_len") for h in hits_list)
+    if read_mode and ccr_types and mec_complex not in ("Negative",) \
+            and not _has_defined_type(mec_complex, ccr_types, rules):
+        for alt in _read_mode_classes(genes_found, rules):
+            if alt != mec_complex and _has_defined_type(alt, ccr_types, rules):
+                warnings.append(
+                    f"Read mode: {mec_complex} + {ccr_complex} is not a defined type; using {alt} "
+                    f"(its markers are also present; reads cannot localise IS431/IS1272 to the mec locus)")
+                mec_complex = alt
+                break
 
     # Step 3: SCCmec type assignment
     sccmec_type = "Unknown"
@@ -272,7 +394,9 @@ def classify_sccmec(hits_list):
             "hits_summary": hits_list,
         }
 
-    if mec_complex == "Negative":
+    if mec_complex == UNDETERMINED_CLASS and ccr_types:
+        status = "Partial (Assembly-limited)"
+    elif mec_complex == "Negative":
         status = "Partial (Orphan ccr)"
         warnings.append("Found ccr genes but no mecA/mecB/mecC")
     elif not ccr_types:
@@ -321,6 +445,11 @@ def classify_sccmec(hits_list):
     iwg_type, iwg_designation, type_candidates = _iwg_designations(
         mec_complex, ccr_types, hits_list, rules)
 
+    # Class C (IS431 orientation unresolved, e.g. read mode): C1 and C2 types both fit;
+    # name them all instead of the first one tried.
+    if mec_complex == "Class C" and len(ccr_types) == 1 and len(type_candidates) > 1:
+        sccmec_type = " / ".join(type_candidates)
+
     # Composite detection: multiple ccr types. Name every defined type that fits
     # rather than the first rule in db order (class B + ccr1 + ccr2 is I or IV).
     if len(ccr_types) > 1 and type_candidates:
@@ -332,8 +461,9 @@ def classify_sccmec(hits_list):
 
     # Fragmented assemblies: a mec gene at a contig end means the downstream IS431
     # (class C/D distinction) and the ccr genes may simply be on other contigs.
-    assembly_limited = (
-        (not ccr_types or mec_complex == "Class D") and _mec_at_contig_edge(hits_list))
+    assembly_limited = mec_split and (not ccr_types or mec_complex in ("Class D", UNDETERMINED_CLASS))
+    if not ccr_types:   # mec found, no ccr: distinguish a split cassette from an intact one
+        iwg_type = "nt(?)" if assembly_limited else "nt(no ccr)"
     if assembly_limited:
         if not ccr_types and status == "Partial (Unclassifiable)":
             status = "Partial (Assembly-limited)"

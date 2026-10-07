@@ -78,24 +78,78 @@ def test_mec_and_ccr_without_defined_type():
 def test_assembly_limited_when_mec_at_contig_end():
     """Short-read assemblies: mecA on a ~4.7 kb contig ending ~230 bp after the gene."""
     r = classify_sccmec([hit("mecA", 2487, 4494, contig="c19", contig_len=4724)])
-    assert r["assembly_limited"] is True
+    assert r["assembly_limited"] is True and r["iwg_type"] == "nt(?)"
     assert r["status"] == "Partial (Assembly-limited)"
     assert any("contig end" in w for w in r["warnings"])
 
 
 def test_not_assembly_limited_when_mec_mid_contig():
     r = classify_sccmec([hit("mecA", 500000, 502000, contig_len=2_800_000)])
-    assert r["assembly_limited"] is False
+    assert r["assembly_limited"] is False and r["iwg_type"] == "nt(no ccr)"
     assert r["status"] == "Partial (Unclassifiable)"
 
 
 def test_complete_cassette_never_flagged_even_near_edge():
     """A fully typed cassette is not flagged even if mecA is near a contig end."""
-    hits = [h for h in C2] + [hit("ccrC1", 10000, 11700)]
-    hits[0] = hit("mecA", 100, 2100, contig_len=40000)
+    L = 24500                                     # mecA ends 500 bp before the contig end
+    hits = [hit("ccrC1", 5000, 6700, contig_len=L), hit("IS431_1", 8000, 8800, "+", contig_len=L),
+            hit("IS431_2", 18000, 18800, "-", contig_len=L), hit("mecR1", 19000, 20000, contig_len=L),
+            hit("mecA", 22000, 24000, contig_len=L)]
     r = classify_sccmec(hits)
     assert r["assembly_limited"] is False and r["iwg_type"] == "V(5C2)"
 
 
 def test_edge_threshold_constant():
     assert 500 <= CONTIG_EDGE_BP <= 5000
+
+
+def test_distant_IS1272_does_not_make_class_B():
+    """IS1272 elsewhere in the genome must not define the mec class (was nt(5B))."""
+    hits = C2 + [hit("ccrC1", 10000, 11700), hit("IS1272", 900000, 901500)]
+    r = classify_sccmec(hits)
+    assert r["mec_complex"] == "Class C2" and r["iwg_type"] == "V(5C2)"
+    assert any("Ignored for mec class" in w for w in r["warnings"])
+
+
+def test_IS1272_on_other_contig_ignored():
+    hits = C2 + [hit("ccrC1", 10000, 11700), hit("IS1272", 100, 1600, contig="c9", contig_len=8000)]
+    assert classify_sccmec(hits)["mec_complex"] == "Class C2"
+
+
+def test_split_cassette_with_ccr_has_undetermined_class():
+    """mecA at a contig end, ccrC elsewhere, IS431 only far away: class unknown, not D/C2."""
+    hits = [hit("mecA", 2487, 4494, contig="c19", contig_len=4724),
+            hit("ccrC1", 500, 2200, contig="c40", contig_len=30000),
+            hit("IS431", 700000, 700800, contig="chr", contig_len=2_000_000)]
+    r = classify_sccmec(hits)
+    assert r["mec_complex"] == "Undetermined (fragmented)"
+    assert r["iwg_type"] == "nt(5?)"
+    assert r["status"] == "Partial (Assembly-limited)" and r["assembly_limited"] is True
+
+
+def test_intact_class_D_mid_contig_still_class_D():
+    hits = [hit("mecA", 50000, 52000, contig_len=200000), hit("mecR1", 52000, 53000, contig_len=200000),
+            hit("ccrC1", 30000, 31700, contig_len=200000)]
+    r = classify_sccmec(hits)
+    assert r["assembly_limited"] is False and r["mec_complex"] != "Undetermined (fragmented)"
+
+
+def test_orientation_from_flanking_IS431_not_last_hit():
+    """Extra IS431 copies must not flip C1/C2: use the copies flanking mecA."""
+    hits = [hit("IS431_1", 12000, 12800, "+"), hit("mecA", 14000, 16000),     # left flank +
+            hit("mecR1", 16000, 17000), hit("IS431_2", 18000, 18800, "+"),    # right flank +  -> C1
+            hit("IS431_2", 26000, 26800, "-"),                                # extra copy, opposite
+            hit("ccrC1", 9000, 10700)]
+    r = classify_sccmec(hits)
+    assert r["mec_complex"] == "Class C1" and r["iwg_type"] == "VII(5C1)"
+
+
+def test_conflicting_strands_at_one_IS431_locus_use_longest_hit():
+    """A partial reverse hit overlapping a full-length IS431 must not decide the strand."""
+    hits = [hit("IS431_1", 12000, 12790, "-"), hit("mecA", 13000, 15000),
+            hit("IS431_1", 17400, 18190, "+"),                 # full length, +
+            hit("IS431_2", 17450, 18125, "-"),                 # partial, -, same locus
+            hit("ccrC1", 5000, 6700)]
+    hits[3]["aln_len"] = 675
+    r = classify_sccmec(hits)
+    assert r["mec_complex"] == "Class C2" and r["iwg_type"] == "V(5C2)"
