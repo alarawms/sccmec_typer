@@ -189,7 +189,9 @@ def main():
     with open(tsv_output_file, 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         # Header
-        writer.writerow(['Sample', 'Status', 'mecA_Present', 'Mec_Gene', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score', 'Best_Fit_Applied'])
+        # New columns are appended at the end so positional consumers keep working.
+        writer.writerow(['Sample', 'Status', 'mecA_Present', 'Mec_Gene', 'SCCmec_Type', 'Mec_Complex', 'Ccr_Complex', 'Genes_Detected', 'Warnings', 'Estimated_Type', 'Estimation_Score', 'Best_Fit_Applied',
+                         'IWG_Type', 'IWG_Designation', 'Type_Candidates', 'Ccr_Copies', 'Assembly_Limited'])
         # Data
         sample_name = os.path.basename(args.input1)
         genes_str = ",".join(result.get('genes_detected', []))
@@ -228,6 +230,11 @@ def main():
             est_type,
             est_score,
             "Yes" if best_fit_applied else "No",
+            result.get('iwg_type', 'nt'),
+            result.get('iwg_designation') or '',
+            ";".join(result.get('type_candidates', [])),
+            ";".join(f"{k.replace('Type ', 'ccr')}x{v}" for k, v in result.get('ccr_copies', {}).items()),
+            "Yes" if result.get('assembly_limited') else "No",
         ])
     print(f"TSV summary written to {tsv_output_file}")
 

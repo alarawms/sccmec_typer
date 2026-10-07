@@ -36,6 +36,30 @@ A robust, standalone bioinformatics tool for **Staphylococcal Cassette Chromosom
 | XIV | 5A | A | 5 | ccrC1 | SC792 |
 | XV | 7A | A | 7 | ccrA1B6 | NV_1 |
 
+## IWG-SCC designations, composites and fragmented assemblies
+
+Besides `SCCmec_Type`, every result reports:
+
+| Field (TSV / JSON) | Meaning | Examples |
+|---|---|---|
+| `IWG_Type` / `iwg_type` | Type with IWG-SCC designation; extra ccr complexes appended with `&` | `V(5C2)`, `V(5C2&5)` (second ccrC copy), `VII(5C1&1)`, `nt(9B)` |
+| `IWG_Designation` / `iwg_designation` | Designation only | `5C2&5` |
+| `Type_Candidates` / `type_candidates` | **All** defined types consistent with the mec class and ccr complexes found | `Type I;Type IV` (class B + ccr1 + ccr2) |
+| `Ccr_Copies` / `ccr_copies` | Copies of each ccr complex at distinct loci (overlapping allele hits collapse to one) | `ccr5x2` |
+| `Assembly_Limited` / `assembly_limited` | `Yes` when ccr is missing or mec is class D **and** a mec gene lies within 1.5 kb of a contig end | `Yes` |
+
+**Composites.** When several ccr complexes are present, the type is no longer taken from
+the first matching rule in `db/rules.json`; all fitting types are listed
+(e.g. `Composite (Type I / Type IV)`, `I(1B&2) / IV(2B&1)`). Class A + ccr3 + ccrC
+is reported as `III(3A&5) / XIV(5A&3)` — whether the extra ccrC belongs to the
+cassette or an adjacent element (e.g. SCCmercury) needs the cassette structure.
+
+**Fragmented assemblies.** IS431 copies flanking *mecA* often split short-read
+assemblies, leaving *mecA* on a short contig without the downstream IS431 or the ccr
+genes. Such calls get status `Partial (Assembly-limited)` (or a warning when a class D
+call is made) instead of a confident "no ccr / class D". Type these samples from reads
+(`--1 R1 --2 R2`) or a long-read assembly.
+
 ## Installation
 
 ### Local Development
